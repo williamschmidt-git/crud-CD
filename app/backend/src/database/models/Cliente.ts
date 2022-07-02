@@ -21,7 +21,7 @@ Cliente.init({
     type: STRING,
     allowNull: false,
   },
-  Cidade: {
+  cidade: {
     type: TEXT,
     allowNull: false,
   },
