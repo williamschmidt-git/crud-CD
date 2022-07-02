@@ -1,3 +1,30 @@
-import { Model, INTEGER, BOOLEAN } from 'sequelize';
-import db from '.';
-import Teams from './Teams';
+import { STRING, Model, INTEGER, FLOAT } from 'sequelize';
+import db from './index';
+
+class Produto extends Model {
+  public idProduto: number;
+
+  public dscProduto: string;
+
+  public vlrUnitario: number;
+}
+
+Produto.init({
+  idProduto: {
+    type: INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+  },
+  dscProduto: {
+    type: STRING,
+    allowNull: false,
+  },
+  vlrUnitario: {
+    type: FLOAT,
+    allowNull: false,
+  },
+}, {
+  underscored: true,
+  sequelize: db,
+});
