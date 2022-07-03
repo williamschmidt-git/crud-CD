@@ -26,7 +26,7 @@ Produto.init({
     allowNull: false,
   },
 }, {
-  underscored: true,
+  underscored: false,
   sequelize: db,
   timestamps: false,
 });

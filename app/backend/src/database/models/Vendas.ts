@@ -24,22 +24,22 @@ Venda.init({
   idCliente: {
     type: INTEGER,
     allowNull: false,
-    onUpdate: 'CASCADE',
-    onDelete: 'CASCADE',
     references: {
       model: 'Cliente',
       key: 'idCliente',
     },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
   },
   idProduto: {
     type: INTEGER,
     allowNull: false,
-    onUpdate: 'CASCADE',
-    onDelete: 'CASCADE',
     references: {
       model: 'Produto',
       key: 'idProduto',
     },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
   },
   qtdVenda: {
     type: INTEGER,
@@ -50,7 +50,7 @@ Venda.init({
     allowNull: false,
   },
 }, {
-  underscored: true,
+  underscored: false,
   sequelize: db,
   timestamps: false,
 });
