@@ -12,9 +12,8 @@ class ClienteRouter {
   }
 
   public getRoutes() {
-    this._route.get('/', async (req: Request, res: Response) => {
-      await this._controller.findAll(req, res);
-    });
+    this._route.get('/', this._controller.findAll);
+    this._route.get('/list?', this._controller.findByName);
     return this._route;
   }
 }

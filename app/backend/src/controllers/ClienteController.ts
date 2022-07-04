@@ -7,15 +7,25 @@ class ClienteController implements Icliente {
   constructor(serviceInstance: any) {
     this._service = serviceInstance;
     this.findAll = this.findAll.bind(this);
+    this.findByName = this.findByName.bind(this);
   }
 
   public findAll = async (_req: Request, res: Response): Promise<Response> => {
-    const clientes = await this._service.findAll();
+    const response = await this._service.findAll();
 
-    if (!clientes) res.status(404).end();
+    if (response.error) return res.status(404).end();
 
-    return res.status(200).json(clientes);
+    return res.status(200).json(response);
   };
+
+  public findByName = async (req: Request, res: Response):Promise<Response> => {
+    const { name } = req.query;
+    const response = await this._service.findByName(name);
+
+    if (response.error) return res.status(404).end();
+
+    return res.status(200).json(response);
+  }; 
 }
 
 export default ClienteController;
