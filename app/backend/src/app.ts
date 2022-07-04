@@ -1,13 +1,14 @@
 import * as express from 'express';
 import * as cors from 'cors';
+import { clienteRouter } from './factory';
 
 class App {
   public app: express.Express;
 
-
   constructor() {
     this.app = express();
     this.config();
+    this.routes();
   }
 
   private config():void {
@@ -24,6 +25,10 @@ class App {
 
   public start(PORT: string | number):void {
     this.app.listen(PORT, () => console.warn(`Listen on ${PORT}`));
+  }
+  
+  public routes(): void {
+    this.app.use('/cliente', clienteRouter.getRoutes());
   }
 }
 

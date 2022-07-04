@@ -1,6 +1,5 @@
 import { STRING, Model, INTEGER, FLOAT } from 'sequelize';
 import db from './index';
-import Venda from './Vendas';
 
 class Produto extends Model {
   public idProduto: number;
@@ -29,11 +28,6 @@ Produto.init({
   underscored: false,
   sequelize: db,
   timestamps: false,
-});
-
-Produto.hasOne(Venda, {
-  foreignKey: 'idProduto',
-  as: 'produto',
 });
 
 export default Produto;

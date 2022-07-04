@@ -55,6 +55,16 @@ Venda.init({
   timestamps: false,
 });
 
+Produto.hasOne(Venda, {
+  foreignKey: 'idProduto',
+  as: 'produto',
+});
+
+Cliente.hasOne(Venda, {
+  foreignKey: 'idCliente',
+  as: 'cliente',
+});
+
 Venda.belongsTo(Cliente, {
   foreignKey: 'idCliente',
   as: 'cliente',
@@ -64,5 +74,7 @@ Venda.belongsTo(Produto, {
   foreignKey: 'idProduto',
   as: 'produto',
 });
+
+
 
 export default Venda;
