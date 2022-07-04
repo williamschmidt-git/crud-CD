@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('vendas', {
+    await queryInterface.createTable('Vendas', {
       idVenda: {
         allowNull: false,
         autoIncrement: true,
@@ -18,8 +18,8 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'clientes',
-          key: 'idCliente'
+          model: 'Clientes',
+          key: 'idCliente',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
@@ -28,8 +28,8 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'produtos',
-          key: 'idProduto'
+          model: 'Produtos',
+          key: 'idProduto',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
@@ -40,12 +40,12 @@ module.exports = {
       },
       vlrUnitarioVenda: {
         type: Sequelize.FLOAT,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   },
 
   async down(queryInterface, _Sequelize) {
-    await queryInterface.dropTable('vendas');
+    await queryInterface.dropTable('Vendas');
   },
 };
