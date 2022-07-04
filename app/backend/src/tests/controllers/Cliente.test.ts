@@ -4,6 +4,7 @@ import sinon from 'sinon';
 import { describe } from 'mocha'
 import clienteService from '../../services/ClienteService';
 import { app } from '../../app'
+import { CLIENTE1_MOCK } from './mocks/Clientes.mock';
 
 const { expect } = chai;
 
@@ -49,6 +50,50 @@ describe('Cliente Controller', () => {
 
     it('Deve retornar um objeto', async () => {
       const response = await chai.request(app).get('/cliente')
+
+      expect(response.body).to.be.an('object')
+    });
+  });
+
+  describe('findByName endpoint. Em caso de Sucesso:', () =>{
+    before(() => {
+      sinon.stub(clienteService.prototype, 'findByName').resolves(CLIENTE1_MOCK);
+    });
+
+    after(() => {
+      (clienteService.prototype.findByName as sinon.SinonStub).restore();
+    })
+
+    it('Deve retornar um código HTTP 200', async () => {
+      const response = await chai.request(app).get('/cliente/list?name=Cli1')
+
+      expect(response).to.have.status(200);
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const response = await chai.request(app).get('/cliente/list?name=Cli1')
+
+      expect(response.body).to.be.deep.equal(CLIENTE1_MOCK);
+    });
+  });
+
+  describe('findByName endpoint. Em caso de falha:', () =>{
+    before(() => {
+      sinon.stub(clienteService.prototype, 'findByName').resolves({ error: 'Error'});
+    });
+
+    after(() => {
+      (clienteService.prototype.findByName as sinon.SinonStub).restore();
+    })
+
+    it('Deve retornar um código HTTP 404', async () => {
+      const response = await chai.request(app).get('/cliente/list?name=Cli1')
+
+      expect(response).to.have.status(404);
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const response = await chai.request(app).get('/cliente/list?name=Cli1')
 
       expect(response.body).to.be.an('object')
     });

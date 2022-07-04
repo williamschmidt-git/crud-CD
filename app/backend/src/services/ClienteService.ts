@@ -17,13 +17,13 @@ class ClienteService implements Service {
     return clientes;
   }
 
-  public findByName = async (name: string): Promise<Icliente | null | Ierror> => {
+  public async findByName(name: string): Promise<Icliente | null | Ierror> {
     const cliente = await this._model.findAll({ where: { nmCliente: name } });
 
     if (!cliente) return { error: 'Não encontrado ' };
 
     return cliente;
-  };
+  }
 
   public update = async (id: string, obj: Icliente): Promise<Icliente | null | Ierror> => {
     const cliente = await this._model.findByPk(id);
