@@ -12,6 +12,12 @@ class ClienteService implements Service {
     const clientes = await this._model.findAll();
     return clientes;
   };
+
+  public findByName = async (name: string): Promise<Icliente> => {
+    const cliente = await this._model.findAll({ where: { nmCliente: name } });
+
+    return cliente;
+  };
 }
 
 export default ClienteService;
