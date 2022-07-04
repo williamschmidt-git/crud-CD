@@ -44,6 +44,12 @@ class ClienteService implements Service {
 
     return clienteDeletado;
   };
+
+  public create = async (obj: Icliente): Promise<Icliente | Ierror> => {
+    const cliente = await this._model.create(obj);
+
+    return cliente;
+  };
 }
 
 export default ClienteService;

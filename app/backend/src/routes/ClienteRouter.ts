@@ -16,6 +16,7 @@ class ClienteRouter {
     this._route.get('/list?', this._controller.findByName);
     this._route.patch('/:id', this._controller.update);
     this._route.delete('/:id', this._controller.delete);
+    this._route.post('/', this._controller.create);
     return this._route;
   }
 }

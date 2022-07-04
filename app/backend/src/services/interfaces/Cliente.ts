@@ -1,6 +1,5 @@
 export interface Icliente {
-  idCliente: number,
+  idCliente?: number,
   nmCliente: string,
   cidade: string
 }
-
