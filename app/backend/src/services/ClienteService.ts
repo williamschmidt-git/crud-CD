@@ -12,7 +12,7 @@ class ClienteService implements Service {
   public findAll = async (): Promise<Icliente[] | Ierror> => {
     const clientes = await this._model.findAll();
 
-    if (!clientes) return { error: 'Not found' };
+    if (!clientes) return { error: 'Não encontrado' };
 
     return clientes;
   };
@@ -20,9 +20,29 @@ class ClienteService implements Service {
   public findByName = async (name: string): Promise<Icliente | null | Ierror> => {
     const cliente = await this._model.findAll({ where: { nmCliente: name } });
 
-    if (!cliente) return { error: 'Not found ' };
+    if (!cliente) return { error: 'Não encontrado ' };
 
     return cliente;
+  };
+
+  public update = async (id: string, obj: Icliente): Promise<Icliente | null | Ierror> => {
+    const cliente = await this._model.findByPk(id);
+
+    if (!cliente) return { error: '"Cliente" não encontrado' };
+
+    const clienteAtualizado = await this._model.update({ ...obj }, { where: { idCliente: id } });
+
+    return clienteAtualizado;
+  };
+
+  public delete = async (id: string): Promise<Icliente | null | Ierror> => {
+    const cliente = await this._model.findByPk(id);
+
+    if (!cliente) return { error: '"Cliente" não encontrado' };
+
+    const clienteDeletado = await this._model.destroy({ where: { idCliente: id } });
+
+    return clienteDeletado;
   };
 }
 

@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
 
 class ClienteRouter {
   private _controller;
@@ -14,6 +14,8 @@ class ClienteRouter {
   public getRoutes() {
     this._route.get('/', this._controller.findAll);
     this._route.get('/list?', this._controller.findByName);
+    this._route.patch('/:id', this._controller.update);
+    this._route.delete('/:id', this._controller.delete);
     return this._route;
   }
 }
