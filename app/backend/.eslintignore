@@ -1,6 +1,7 @@
-/src/database/
+node_modules/
+./src/database/
 seeders
-/src/tests/
 jest.config.js
-/src/coverage
+./src/coverage
 .eslintrc.js
+./src/tests/*

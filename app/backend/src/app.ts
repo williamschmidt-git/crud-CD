@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { clienteRouter } from './factory';
+import errorMiddleware from './middlewares/error';
 
 class App {
   public app: express.Express;
@@ -9,6 +10,7 @@ class App {
     this.app = express();
     this.config();
     this.routes();
+    this.app.use(errorMiddleware);
   }
 
   private config():void {
@@ -30,6 +32,13 @@ class App {
   public routes(): void {
     this.app.use('/cliente', clienteRouter.getRoutes());
   }
+
+  public getApp() {
+    return this.app;
+  }
 }
 
 export { App };
+
+// A execução dos testes de cobertura depende dessa exportação
+export const { app } = new App();

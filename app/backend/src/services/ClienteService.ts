@@ -9,13 +9,13 @@ class ClienteService implements Service {
     this._model = dbInstance;
   }
 
-  public findAll = async (): Promise<Icliente[] | Ierror> => {
+  public async findAll(): Promise<Icliente[] | Ierror> {
     const clientes = await this._model.findAll();
 
     if (!clientes) return { error: 'Não encontrado' };
 
     return clientes;
-  };
+  }
 
   public findByName = async (name: string): Promise<Icliente | null | Ierror> => {
     const cliente = await this._model.findAll({ where: { nmCliente: name } });
