@@ -208,4 +208,26 @@ describe('Cliente Controller', () => {
       expect(response.body).to.be.deep.equal(CLIENTE_CRIADO_MOCK)
     });
   });
+
+  describe('create endpoint. Em caso de falha:', () => {
+    before(() => {
+      sinon.stub(clienteService.prototype, 'create').resolves(CLIENTE_CRIADO_MOCK);
+    });
+
+    after(() => {
+      (clienteService.prototype.create as sinon.SinonStub).restore();
+    })
+
+    it('Deve retornar um código HTTP 201', async () => {
+      const response = await chai.request(app).post('/cliente/').send({ nmCliente: 'William'})
+
+      expect(response).to.have.status(400);
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const response = await chai.request(app).post('/cliente/').send({ nmCliente: 'William'})
+
+      expect(response.body).to.be.deep.equal('Todos os campos são obrigatórios')
+    });
+  });
 });
