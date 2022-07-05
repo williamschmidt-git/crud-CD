@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import Icontroller from './interfaces/Controller';
-import Schema from '../schemas/ClienteSchema';
+import Schema from '../schemas/ProdutoSchema';
 
 class ProdutoController implements Icontroller {
   private _service;
@@ -45,6 +45,19 @@ class ProdutoController implements Icontroller {
     if (response.error) return res.status(404).json({ error: response.error });
 
     return res.status(200).json({ message: 'Cliente deletado' });
+  };
+
+  public create = async (req: Request, res: Response):Promise<Response> => {
+    const { error } = Schema.validate(req.body);
+
+    if (error) {
+      const [code, message] = error.message.split('|');
+      return res.status(Number(code)).json(message);
+    }
+
+    const response = await this._service.create(req.body);
+
+    return res.status(201).json(response);
   };
 }
 
