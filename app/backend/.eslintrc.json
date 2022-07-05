@@ -27,8 +27,9 @@
     "parserOptions": {
       "ecmaVersion": 2019,
       "sourceType": "module",
-      "project": "./app/backend/tsconfig.json"
+      "project": "./tsconfig.json"
     },
+    "ignorePatterns": ["src/tests/*", "src/database"],
     "plugins": [
       "@typescript-eslint",
       "sonarjs",

@@ -5,7 +5,7 @@
   "main": "./build/server",
   "scripts": {
     "build": "/bin/sh tsc_eval.sh",
-    "test": "mocha -r ts-node/register ./src/tests/*$NAME*/*$NAME*.{test,spec}.ts -t 10000 --exit",
+    "test": "npm run db:reset && mocha -r ts-node/register ./src/tests/*$NAME*/*$NAME*.{test,spec}.js -t 10000 --exit",
     "prestart": "npm run build && npm run db:reset",
     "start": "node .",
     "dev": "tsnd -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
@@ -18,7 +18,7 @@
     "@types/chai": "^4.3.1",
     "@types/chai-http": "^4.2.0",
     "@types/dotenv": "^8.2.0",
-    "@types/jest": "^27.5.1",
+    "@types/jest": "^27.5.2",
     "@types/mocha": "^9.1.1",
     "@types/node": "^17.0.45",
     "@types/sequelize": "^4.28.13",
