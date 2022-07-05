@@ -25,6 +25,17 @@ class ProdutoController implements Icontroller {
 
     return res.status(200).json(response);
   };
+
+  public update = async (req: Request, res: Response):Promise<Response> => {
+    const { id } = req.params;
+    const obj = req.body;
+
+    const response = await this._service.update(id, obj);
+
+    if (response.error) return res.status(404).json({ error: response.error });
+
+    return res.status(200).json({ message: 'Cliente Atualizado' });
+  };
 }
 
 export default ProdutoController;
