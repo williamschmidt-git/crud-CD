@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { clienteRouter } from './factory';
+import { clienteRouter, produtoRouter } from './factory';
 import errorMiddleware from './middlewares/error';
 
 class App {
@@ -31,6 +31,7 @@ class App {
   
   public routes(): void {
     this.app.use('/cliente', clienteRouter.getRoutes());
+    this.app.use('/produto', produtoRouter.getRoutes());
   }
 
   public getApp() {

@@ -2,7 +2,7 @@ import { Service } from './interfaces/Service';
 import { Icliente } from './interfaces/Cliente';
 import { Ierror } from './interfaces/Error';
 
-class ClienteService implements Service {
+class ClienteService implements Service<Icliente> {
   private _model;
 
   constructor(dbInstance: any) {
