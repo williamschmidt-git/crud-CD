@@ -1,6 +1,9 @@
 import { Ierror } from './interfaces/Error';
 import { Iproduto } from './interfaces/Produto';
 import { Service } from './interfaces/Service';
+import Sequelize from 'sequelize';
+
+const Op = Sequelize.Op;
 
 class ProdutoService implements Service<Iproduto> {
   private _model;
@@ -18,7 +21,11 @@ class ProdutoService implements Service<Iproduto> {
   }
 
   public async findByName(name: string): Promise<Iproduto | null | Ierror> {
-    const produto = await this._model.findAll({ where: { dscProduto: name } });
+    const produto = await this._model.findAll({ where: {
+      dscProduto: {
+        [Op.like]:  `%${name}%`,
+      },
+    } });
 
     if (!produto) return { error: 'Não encontrado ' };
 
