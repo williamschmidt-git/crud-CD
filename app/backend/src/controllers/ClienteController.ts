@@ -59,7 +59,7 @@ class ClienteController implements Icliente {
 
     const response = await this._service.create(req.body);
 
-    return res.status(200).json(response);
+    return res.status(201).json(response);
   };
 }
 

@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { describe } from 'mocha'
 import clienteService from '../../services/ClienteService';
 import { app } from '../../app'
-import { CLIENTE1_MOCK } from './mocks/Clientes.mock';
+import { CLIENTE1_MOCK, CLIENTE_CRIADO_MOCK } from './mocks/Clientes.mock';
 
 const { expect } = chai;
 
@@ -140,6 +140,72 @@ describe('Cliente Controller', () => {
       const response = await chai.request(app).patch('/cliente/10000')
 
       expect(response.body).to.be.deep.equal({ error: '"Cliente" não encontrado' });
+    });
+  });
+
+  describe('delete endpoint. Em caso de sucesso:', () => {
+    before(() => {
+      sinon.stub(clienteService.prototype, 'delete').resolves(CLIENTE1_MOCK);
+    });
+
+    after(() => {
+      (clienteService.prototype.delete as sinon.SinonStub).restore();
+    })
+
+    it('Deve retornar um código HTTP 200', async () => {
+      const response = await chai.request(app).delete('/cliente/1')
+
+      expect(response).to.have.status(200);
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const response = await chai.request(app).delete('/cliente/1')
+
+      expect(response.body).to.be.deep.equal({ message: 'Cliente deletado'});
+    });
+  });
+
+  describe('delete endpoint. Em caso de falha:', () => {
+    before(() => {
+      sinon.stub(clienteService.prototype, 'delete').resolves({ error: '"Cliente" não encontrado' });
+    });
+
+    after(() => {
+      (clienteService.prototype.delete as sinon.SinonStub).restore();
+    })
+
+    it('Deve retornar um código HTTP 404', async () => {
+      const response = await chai.request(app).delete('/cliente/1')
+
+      expect(response).to.have.status(404);
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const response = await chai.request(app).delete('/cliente/1')
+
+      expect(response.body).to.be.deep.equal({ error: '"Cliente" não encontrado' });
+    });
+  });
+
+  describe('create endpoint. Em caso de sucesso:', () => {
+    before(() => {
+      sinon.stub(clienteService.prototype, 'create').resolves(CLIENTE_CRIADO_MOCK);
+    });
+
+    after(() => {
+      (clienteService.prototype.create as sinon.SinonStub).restore();
+    })
+
+    it('Deve retornar um código HTTP 201', async () => {
+      const response = await chai.request(app).post('/cliente/').send(CLIENTE_CRIADO_MOCK)
+
+      expect(response).to.have.status(201);
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const response = await chai.request(app).post('/cliente/').send(CLIENTE_CRIADO_MOCK)
+
+      expect(response.body).to.be.deep.equal(CLIENTE_CRIADO_MOCK)
     });
   });
 });

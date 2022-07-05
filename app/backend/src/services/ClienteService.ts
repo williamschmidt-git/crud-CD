@@ -35,7 +35,7 @@ class ClienteService implements Service {
     return clienteAtualizado;
   }
 
-  public delete = async (id: string): Promise<Icliente | null | Ierror> => {
+  public async delete(id: string): Promise<Icliente | null | Ierror> {
     const cliente = await this._model.findByPk(id);
 
     if (!cliente) return { error: '"Cliente" não encontrado' };
@@ -45,7 +45,7 @@ class ClienteService implements Service {
     return clienteDeletado;
   };
 
-  public create = async (obj: Icliente): Promise<Icliente | Ierror> => {
+  public async create (obj: Icliente): Promise<Icliente | Ierror> {
     const cliente = await this._model.create(obj);
 
     return cliente;
