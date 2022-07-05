@@ -112,4 +112,55 @@ describe.only('Cliente Service', () => {
       expect(response).to.be.deep.equal({ error: '"Cliente" não encontrado' })
     });
   });
+
+  describe('delete endpoint. Em caso de sucesso:', () => {
+    afterEach(() => {
+      (ClienteModel.destroy).restore();
+    });
+
+    it('Deve chamar a função "delete" e retornar um número', async () => {
+      sinon.stub(ClienteModel, 'destroy').resolves(1)
+
+      const response = await service.delete('1');
+
+      expect(ClienteModel.destroy.called).to.be.true;
+      expect(ClienteModel.destroy).to.be.a('function');
+      expect(response).to.be.an('number')
+      expect(response).to.be.deep.equal(1)
+    });
+  });
+
+  describe('delete endpoint. Em caso de falha:', () => {
+    afterEach(() => {
+      (ClienteModel.destroy).restore();
+    });
+
+    it('Deve chamar a função "delete" e retornar uma mensagme de erro', async () => {
+      sinon.stub(ClienteModel, 'destroy').resolves({ error: '"Cliente" não encontrado' })
+
+      const response = await service.delete('1000');
+
+      expect(ClienteModel.destroy.called).to.be.false;
+      expect(ClienteModel.destroy).to.be.a('function');
+      expect(response).to.be.an('Object')
+      expect(response).to.be.deep.equal({ error: '"Cliente" não encontrado' })
+    });
+  });
+
+  describe('create endpoint. Em caso de sucesso:', () => {
+    afterEach(() => {
+      (ClienteModel.create).restore();
+    });
+
+    it('Deve chamar a função "create" e retornar o objeto criado', async () => {
+      sinon.stub(ClienteModel, 'create').resolves(CLIENTE1_MOCK)
+
+      const response = await service.create(CLIENTE_CRIADO_MOCK);
+
+      expect(ClienteModel.create.called).to.be.true;
+      expect(ClienteModel.create).to.be.a('function');
+      expect(response).to.be.an('Object')
+      expect(response).to.be.deep.equal(CLIENTE1_MOCK)
+    });
+  });
 });

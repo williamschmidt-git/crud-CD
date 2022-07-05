@@ -5,7 +5,7 @@
   "main": "./build/server",
   "scripts": {
     "build": "/bin/sh tsc_eval.sh",
-    "test": "mocha -r ts-node/register ./src/tests/*$NAME*/*$NAME*.{test,spec}.js -t 10000 --exit",
+    "test": "npm run db:reset && mocha -r ts-node/register ./src/tests/*$NAME*/*$NAME*.{test,spec}.js -t 10000 --exit",
     "prestart": "npm run build && npm run db:reset",
     "start": "node .",
     "dev": "tsnd -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
