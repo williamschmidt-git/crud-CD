@@ -55,7 +55,7 @@ describe('Cliente Controller', () => {
     });
   });
 
-  describe('findByName endpoint. Em caso de Sucesso:', () => {
+  describe('findByName endpoint. Em caso de sucesso:', () => {
     before(() => {
       sinon.stub(clienteService.prototype, 'findByName').resolves(CLIENTE1_MOCK);
     });
@@ -99,7 +99,7 @@ describe('Cliente Controller', () => {
     });
   });
 
-  describe('update endpoint. Em caso de Sucesso:', () => {
+  describe('update endpoint. Em caso de sucesso:', () => {
     before(() => {
       sinon.stub(clienteService.prototype, 'update').resolves(CLIENTE1_MOCK);
     });
@@ -118,6 +118,28 @@ describe('Cliente Controller', () => {
       const response = await chai.request(app).patch('/cliente/1')
 
       expect(response.body).to.be.deep.equal({ message: 'Cliente Atualizado'});
+    });
+  });
+
+  describe('update endpoint. Em caso de falha:', () => {
+    before(() => {
+      sinon.stub(clienteService.prototype, 'update').resolves({ error: '"Cliente" não encontrado'});
+    });
+
+    after(() => {
+      (clienteService.prototype.update as sinon.SinonStub).restore();
+    })
+
+    it('Deve retornar um código HTTP 404', async () => {
+      const response = await chai.request(app).patch('/cliente/10000')
+
+      expect(response).to.have.status(404);
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const response = await chai.request(app).patch('/cliente/10000')
+
+      expect(response.body).to.be.deep.equal({ error: '"Cliente" não encontrado' });
     });
   });
 });
