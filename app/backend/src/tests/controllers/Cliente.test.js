@@ -17,7 +17,7 @@ describe('Cliente Controller', () => {
     });
 
     after(() => {
-      (clienteService.prototype.findAll as sinon.SinonStub).restore()
+      (clienteService.prototype.findAll).restore()
     })
 
     it('Deve retornar um código HTTP 200', async () => {
@@ -39,7 +39,7 @@ describe('Cliente Controller', () => {
     });
 
     after(() => {
-      (clienteService.prototype.findAll as sinon.SinonStub).restore()
+      (clienteService.prototype.findAll).restore()
     })
 
     it('Deve retornar um código HTTP 404', async () => {
@@ -61,7 +61,7 @@ describe('Cliente Controller', () => {
     });
 
     after(() => {
-      (clienteService.prototype.findByName as sinon.SinonStub).restore();
+      (clienteService.prototype.findByName).restore();
     })
 
     it('Deve retornar um código HTTP 200', async () => {
@@ -83,7 +83,7 @@ describe('Cliente Controller', () => {
     });
 
     after(() => {
-      (clienteService.prototype.findByName as sinon.SinonStub).restore();
+      (clienteService.prototype.findByName).restore();
     })
 
     it('Deve retornar um código HTTP 404', async () => {
@@ -105,7 +105,7 @@ describe('Cliente Controller', () => {
     });
 
     after(() => {
-      (clienteService.prototype.update as sinon.SinonStub).restore();
+      (clienteService.prototype.update).restore();
     })
 
     it('Deve retornar um código HTTP 200', async () => {
@@ -127,7 +127,7 @@ describe('Cliente Controller', () => {
     });
 
     after(() => {
-      (clienteService.prototype.update as sinon.SinonStub).restore();
+      (clienteService.prototype.update).restore();
     })
 
     it('Deve retornar um código HTTP 404', async () => {
@@ -149,7 +149,7 @@ describe('Cliente Controller', () => {
     });
 
     after(() => {
-      (clienteService.prototype.delete as sinon.SinonStub).restore();
+      (clienteService.prototype.delete).restore();
     })
 
     it('Deve retornar um código HTTP 200', async () => {
@@ -171,7 +171,7 @@ describe('Cliente Controller', () => {
     });
 
     after(() => {
-      (clienteService.prototype.delete as sinon.SinonStub).restore();
+      (clienteService.prototype.delete).restore();
     })
 
     it('Deve retornar um código HTTP 404', async () => {
@@ -193,7 +193,7 @@ describe('Cliente Controller', () => {
     });
 
     after(() => {
-      (clienteService.prototype.create as sinon.SinonStub).restore();
+      (clienteService.prototype.create).restore();
     })
 
     it('Deve retornar um código HTTP 201', async () => {
@@ -215,7 +215,7 @@ describe('Cliente Controller', () => {
     });
 
     after(() => {
-      (clienteService.prototype.create as sinon.SinonStub).restore();
+      (clienteService.prototype.create).restore();
     })
 
     it('Deve retornar um código HTTP 201', async () => {
