@@ -55,7 +55,7 @@ describe('Cliente Controller', () => {
     });
   });
 
-  describe('findByName endpoint. Em caso de Sucesso:', () =>{
+  describe('findByName endpoint. Em caso de Sucesso:', () => {
     before(() => {
       sinon.stub(clienteService.prototype, 'findByName').resolves(CLIENTE1_MOCK);
     });
@@ -95,7 +95,29 @@ describe('Cliente Controller', () => {
     it('Deve retornar um objeto', async () => {
       const response = await chai.request(app).get('/cliente/list?name=Cli1')
 
-      expect(response.body).to.be.an('object')
+      expect(response.body).to.be.an('object');
+    });
+  });
+
+  describe('update endpoint. Em caso de Sucesso:', () => {
+    before(() => {
+      sinon.stub(clienteService.prototype, 'update').resolves(CLIENTE1_MOCK);
+    });
+
+    after(() => {
+      (clienteService.prototype.update as sinon.SinonStub).restore();
+    })
+
+    it('Deve retornar um código HTTP 200', async () => {
+      const response = await chai.request(app).patch('/cliente/1').send({ nmCliente: 'William', cidade: 'Cidade100' })
+
+      expect(response).to.have.status(200);
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const response = await chai.request(app).patch('/cliente/1')
+
+      expect(response.body).to.be.deep.equal({ message: 'Cliente Atualizado'});
     });
   });
 });

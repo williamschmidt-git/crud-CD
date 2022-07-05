@@ -25,7 +25,7 @@ class ClienteService implements Service {
     return cliente;
   }
 
-  public update = async (id: string, obj: Icliente): Promise<Icliente | null | Ierror> => {
+  public async update(id: string, obj: Icliente): Promise<Icliente | null | Ierror> {
     const cliente = await this._model.findByPk(id);
 
     if (!cliente) return { error: '"Cliente" não encontrado' };
@@ -33,7 +33,7 @@ class ClienteService implements Service {
     const clienteAtualizado = await this._model.update({ ...obj }, { where: { idCliente: id } });
 
     return clienteAtualizado;
-  };
+  }
 
   public delete = async (id: string): Promise<Icliente | null | Ierror> => {
     const cliente = await this._model.findByPk(id);
