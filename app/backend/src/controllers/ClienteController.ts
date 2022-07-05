@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import Icliente from './interfaces/Cliente';
-import Schema from '../schemas/JoiSchema';
+import Icontroller from './interfaces/Controller';
+import Schema from '../schemas/ClienteSchema';
 
-class ClienteController implements Icliente {
+class ClienteController implements Icontroller {
   private _service;
 
   constructor(serviceInstance: any) {
