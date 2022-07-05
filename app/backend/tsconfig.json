@@ -29,6 +29,6 @@
       "@services/*": ["./src/services/*"]
     }
   },
-  "include": ["src/**/*", "migrations", "tsconfig.eslint.json"],
+  "include": ["src/**/*", "migrations"],
   "exclude": ["src/tests"]
 }

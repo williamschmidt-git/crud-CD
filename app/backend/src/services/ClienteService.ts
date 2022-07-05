@@ -43,13 +43,13 @@ class ClienteService implements Service {
     const clienteDeletado = await this._model.destroy({ where: { idCliente: id } });
 
     return clienteDeletado;
-  };
+  }
 
-  public async create (obj: Icliente): Promise<Icliente | Ierror> {
+  public async create(obj: Icliente): Promise<Icliente | Ierror> {
     const cliente = await this._model.create(obj);
 
     return cliente;
-  };
+  }
 }
 
 export default ClienteService;
