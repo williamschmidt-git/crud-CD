@@ -21,7 +21,7 @@ class ProdutoService implements Service<Iproduto> {
   }
 
   public async findByName(name: string): Promise<Iproduto | null | Ierror> {
-    const produto = await this._model.findAll({ where: {
+    const [produto] = await this._model.findAll({ where: {
       dscProduto: {
         [Op.like]:  `%${name}%`,
       },

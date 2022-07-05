@@ -1,5 +1,5 @@
 export interface Iproduto {
-  idProduto: number;
+  idProduto?: number;
   dscProduto: string;
   vlrUnitario: number;
 }
