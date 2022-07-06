@@ -8,7 +8,7 @@ import { CLIENTE1_MOCK, CLIENTE_CRIADO_MOCK } from '../controllers/mocks/Cliente
 
 const { expect } = chai;
 
-describe.only('Cliente Service', () => {
+describe('Cliente Service', () => {
   const service = new ClienteService(ClienteModel);
 
   describe('findAll endpoint. Em caso de sucesso:', () => {
