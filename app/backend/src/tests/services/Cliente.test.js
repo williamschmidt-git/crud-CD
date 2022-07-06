@@ -45,15 +45,15 @@ describe('Cliente Service', () => {
     });
   });
 
-  describe('findByName endpoint. Em caso de sucesso:', () => {
+  describe('findBy endpoint. Em caso de sucesso:', () => {
     afterEach(() => {
       (ClienteModel.findAll).restore();
     });
 
-    it('Deve chamar a função "findByName" e retornar um Objeto', async () => {
+    it('Deve chamar a função "findBy" e retornar um Objeto', async () => {
       sinon.stub(ClienteModel, 'findAll').resolves(CLIENTE1_MOCK)
 
-      const response = await service.findByName('Cli1');
+      const response = await service.findBy('Cli1');
 
       expect(ClienteModel.findAll.called).to.be.true;
       expect(ClienteModel.findAll).to.be.a('function');
@@ -62,15 +62,15 @@ describe('Cliente Service', () => {
     });
   });
 
-  describe('findByName endpoint. Em caso de falha:', () => {
+  describe('findBy endpoint. Em caso de falha:', () => {
     afterEach(() => {
       (ClienteModel.findAll).restore();
     });
 
-    it('Deve chamar a função "findByName" e retornar um Objeto com mensagem de erro', async () => {
+    it('Deve chamar a função "findBy" e retornar um Objeto com mensagem de erro', async () => {
       sinon.stub(ClienteModel, 'findAll').resolves({ error: '"Cliente" não encontrado'})
 
-      const response = await service.findByName('william');
+      const response = await service.findBy('william');
 
       expect(ClienteModel.findAll.called).to.be.true;
       expect(ClienteModel.findAll).to.be.a('function');
