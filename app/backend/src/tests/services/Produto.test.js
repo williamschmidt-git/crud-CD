@@ -45,39 +45,39 @@ describe('Produto Service', () => {
     });
   });
 
-  // describe('findByName endpoint. Em caso de sucesso:', () => {
-  //   afterEach(() => {
-  //     (ProdutoModel.findAll).restore();
-  //   });
+  describe('findByName endpoint. Em caso de sucesso:', () => {
+    afterEach(() => {
+      (ProdutoModel.findAll).restore();
+    });
 
-  //   it('Deve chamar a função "findByName" e retornar um array', async () => {
-  //     sinon.stub(ProdutoModel, 'findAll').resolves([PRODUTOS_MOCK_1])
+    it('Deve chamar a função "findByName" e retornar um array', async () => {
+      sinon.stub(ProdutoModel, 'findAll').resolves(PRODUTOS_MOCK_1)
 
-  //     const response = await service.findByName('Produto 1');
+      const response = await service.findByName('Produto 1');
 
-  //     expect(ProdutoModel.findAll.called).to.be.true;
-  //     expect(ProdutoModel.findAll).to.be.a('function');
-  //     expect(response).to.be.an('array');
-  //     expect(response).to.be.deep.equal(PRODUTOS_MOCK_1);
-  //   });
-  // });
+      expect(ProdutoModel.findAll.called).to.be.true;
+      expect(ProdutoModel.findAll).to.be.a('function');
+      expect(response).to.be.an('array');
+      expect(response).to.be.deep.equal(PRODUTOS_MOCK_1);
+    });
+  });
 
-  // describe('findByName endpoint. Em caso de falha:', () => {
-  //   afterEach(() => {
-  //     (ProdutoModel.findAll).restore();
-  //   });
+  describe.only('findByName endpoint. Em caso de falha:', () => {
+    afterEach(() => {
+      (ProdutoModel.findAll).restore();
+    });
 
-  //   it('Deve chamar a função "findByName" e retornar um Objeto com mensagem de erro', async () => {
-  //     sinon.stub(ProdutoModel, 'findAll').resolves({ error: '"Produto" não encontrado'})
+    it('Deve chamar a função "findByName" e retornar um Objeto com mensagem de erro', async () => {
+      sinon.stub(ProdutoModel, 'findAll').resolves({ error: '"Produto" não encontrado' })
 
-  //     const response = await service.findByName('william');
+      const response = await service.findByName('william');
 
-  //     expect(ProdutoModel.findAll.called).to.be.true;
-  //     expect(ProdutoModel.findAll).to.be.a('function');
-  //     expect(response).to.be.an('Object')
-  //     expect(response).to.be.deep.equal({ error: '"Produto" não encontrado'})
-  //   });
-  // });
+      expect(ProdutoModel.findAll.called).to.be.true;
+      expect(ProdutoModel.findAll).to.be.a('function');
+      expect(response).to.be.an('Object')
+      expect(response).to.be.deep.equal({ error: '"Produto" não encontrado' })
+    });
+  });
 
   describe('update endpoint. Em caso de sucesso:', () => {
     afterEach(() => {
