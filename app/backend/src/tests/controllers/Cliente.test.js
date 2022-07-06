@@ -11,7 +11,7 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('Cliente Controller', () => {
-  describe('findAll endpoint. Em caso de sucesso:', () =>{
+  describe('findAll endpoint. Em caso de sucesso:', () => {
     before(() => {
       sinon.stub(clienteService.prototype, 'findAll').resolves([]);
     });

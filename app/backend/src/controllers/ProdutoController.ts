@@ -7,6 +7,8 @@ class ProdutoController implements Icontroller {
 
   constructor(serviceInstance: any) {
     this._service = serviceInstance;
+    this.findAll = this.findAll.bind(this);
+    this.findBy = this.findBy.bind(this);
   }
 
   public findAll = async (_req: Request, res: Response): Promise<Response> => {

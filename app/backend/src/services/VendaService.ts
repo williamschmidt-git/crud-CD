@@ -58,7 +58,7 @@ class VendaService {
   }
 
   public async create(obj: Ivenda): Promise<Ivenda | Ierror> {
-    const venda = await this._model.create(obj);
+    const venda: Ivenda = await this._model.create(obj);
 
     return venda;
   }
