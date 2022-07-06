@@ -21,11 +21,11 @@ class ProdutoService implements Service<Iproduto> {
   }
 
   public async findByName(name: string): Promise<Iproduto | null | Ierror> {
-    const produto = await this._model.findAll({ where: {
+    const produto = await this._model.findOne({ where: {
       dscProduto: {
         [Op.like]:  `%${name}%`,
       },
-    } });
+    }, raw: true });
 
     if (!produto) return { error: 'Não encontrado ' };
 
