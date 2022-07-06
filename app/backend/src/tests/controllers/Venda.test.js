@@ -31,4 +31,26 @@ describe.only('Venda Controller', () => {
       expect(response.body).to.be.an('array')
     });
   });
+
+  describe('findAll endpoint. Em caso de falha:', () =>{
+    before(() => {
+      sinon.stub(vendaService.prototype, 'findAll').resolves({ error: 'Error'});
+    });
+
+    after(() => {
+      (vendaService.prototype.findAll).restore()
+    })
+
+    it('Deve retornar um código HTTP 404', async () => {
+      const response = await chai.request(app).get('/venda')
+
+      expect(response).to.have.status(404)
+    });
+
+    it('Deve retornar um objeto', async () => {
+      const response = await chai.request(app).get('/venda')
+
+      expect(response.body).to.be.an('object')
+    });
+  });
 });
