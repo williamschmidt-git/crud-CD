@@ -26,4 +26,21 @@ describe.only('Venda Service', () => {
       expect(response).to.be.deep.equal(FIND_ALL_VENDAS_MOCK)
     });
   });
+
+  describe('findAll endpoint. Em caso de falha:', () => {
+    afterEach(() => {
+      (VendaModel.findAll).restore();
+    });
+
+    it('Deve chamar a função "findAll" e retornar um array vazio', async () => {
+      sinon.stub(VendaModel, 'findAll').resolves([])
+
+      const response = await service.findAll();
+
+      expect(VendaModel.findAll.called).to.be.true;
+      expect(VendaModel.findAll).to.be.a('function');
+      expect(response).to.be.an('array')
+      expect(response).to.be.deep.equal([])
+    });
+  });
 });
