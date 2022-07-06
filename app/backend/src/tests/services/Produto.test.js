@@ -62,7 +62,7 @@ describe('Produto Service', () => {
     });
   });
 
-  describe.only('findByName endpoint. Em caso de falha:', () => {
+  describe('findByName endpoint. Em caso de falha:', () => {
     afterEach(() => {
       (ProdutoModel.findAll).restore();
     });
