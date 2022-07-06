@@ -57,6 +57,15 @@ class VendaService {
     return vendaDeletada;
   }
 
+  public async create(obj: Ivenda): Promise<Ivenda | Ierror> {
+    const venda = await this._model.create(obj);
+
+    return venda;
+  }
+    
+
+  
+
   private async byName({ nome }): Promise<Ivenda | Ierror> {
     const cliente = await this.findCliente(nome);
 
