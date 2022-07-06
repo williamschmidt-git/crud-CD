@@ -10,7 +10,7 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe.only('Venda Controller', () => {
+describe('Venda Controller', () => {
   describe('findAll endpoint. Em caso de sucesso:', () => {
     before(() => {
       sinon.stub(vendaService.prototype, 'findAll').resolves([]);
