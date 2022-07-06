@@ -34,6 +34,17 @@ class VendaService {
     }
   }
 
+  public async update(id: string, obj: Ivenda): Promise<Ivenda | Ierror | null> {
+    const venda = await this._model.findByPk(id);
+    if (!venda) return { error: '"Venda" não encontrada' };
+
+    const vendaAtualizada = await this._model.update({ ...obj }, {
+      where: { idVenda: id },
+    });
+
+    return vendaAtualizada;
+  }
+
   private async byName({ nome }): Promise<Ivenda | Ierror> {
     const cliente = await this.findCliente(nome);
 
@@ -64,14 +75,14 @@ class VendaService {
 
   private async findCliente(name: string): Promise<Icliente | Ierror> {
     const instanciaCliente = new ClienteService(Cliente);
-    const cliente  = await instanciaCliente.findByName(name);
+    const cliente  = await instanciaCliente.findBy(name);
 
     return cliente;
   }
 
   private async findProduto(desc: string): Promise<Iproduto | Ierror> {
     const instanciaProduto = new ProdutoService(Produto);
-    const produto = await instanciaProduto.findByName(desc);
+    const produto = await instanciaProduto.findBy(desc);
 
     if (!produto) return { error: 'error' };
 

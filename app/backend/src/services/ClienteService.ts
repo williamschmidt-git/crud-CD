@@ -17,7 +17,7 @@ class ClienteService implements Service<Icliente> {
     return clientes;
   }
 
-  public async findByName(name: string): Promise<Icliente | null | Ierror> {
+  public async findBy(name: string): Promise<Icliente | null | Ierror> {
     const cliente = await this._model.findOne({ where: { nmCliente: name }, raw: true });
 
     if (!cliente) return { error: 'Não encontrado ' };
