@@ -55,13 +55,13 @@ describe('Cliente Controller', () => {
     });
   });
 
-  describe('findByName endpoint. Em caso de sucesso:', () => {
+  describe('findBy endpoint. Em caso de sucesso:', () => {
     before(() => {
-      sinon.stub(clienteService.prototype, 'findByName').resolves(CLIENTE1_MOCK);
+      sinon.stub(clienteService.prototype, 'findBy').resolves(CLIENTE1_MOCK);
     });
 
     after(() => {
-      (clienteService.prototype.findByName).restore();
+      (clienteService.prototype.findBy).restore();
     })
 
     it('Deve retornar um código HTTP 200', async () => {
@@ -77,13 +77,13 @@ describe('Cliente Controller', () => {
     });
   });
 
-  describe('findByName endpoint. Em caso de falha:', () =>{
+  describe('findBy endpoint. Em caso de falha:', () =>{
     before(() => {
-      sinon.stub(clienteService.prototype, 'findByName').resolves({ error: 'Error'});
+      sinon.stub(clienteService.prototype, 'findBy').resolves({ error: 'Error'});
     });
 
     after(() => {
-      (clienteService.prototype.findByName).restore();
+      (clienteService.prototype.findBy).restore();
     })
 
     it('Deve retornar um código HTTP 404', async () => {
