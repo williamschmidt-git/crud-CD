@@ -63,9 +63,6 @@ class VendaService {
     return venda;
   }
     
-
-  
-
   private async byName({ nome }): Promise<Ivenda | Ierror> {
     const cliente = await this.findCliente(nome);
 
