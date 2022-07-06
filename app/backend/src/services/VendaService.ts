@@ -45,6 +45,18 @@ class VendaService {
     return vendaAtualizada;
   }
 
+  public async delete(id: string): Promise<Ivenda | null | Ierror> {
+    const venda = await this._model.findByPk(id);
+
+    if (!venda) return { error: '"Produto" não encontrado' };
+
+    const vendaDeletada = await this._model.destroy({ where: {
+      idVenda: id,
+    } });
+
+    return vendaDeletada;
+  }
+
   private async byName({ nome }): Promise<Ivenda | Ierror> {
     const cliente = await this.findCliente(nome);
 
