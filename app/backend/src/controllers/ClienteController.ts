@@ -8,7 +8,7 @@ class ClienteController implements Icontroller {
   constructor(serviceInstance: any) {
     this._service = serviceInstance;
     this.findAll = this.findAll.bind(this);
-    this.findByName = this.findByName.bind(this);
+    this.findBy = this.findBy.bind(this);
   }
 
   public findAll = async (_req: Request, res: Response): Promise<Response> => {
@@ -19,9 +19,9 @@ class ClienteController implements Icontroller {
     return res.status(200).json(response);
   };
 
-  public findByName = async (req: Request, res: Response):Promise<Response> => {
+  public findBy = async (req: Request, res: Response):Promise<Response> => {
     const { name } = req.query;
-    const response = await this._service.findByName(name);
+    const response = await this._service.findBy(name);
 
     if (response.error) return res.status(404).end();
 

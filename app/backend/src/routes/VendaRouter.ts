@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-class ProdutoRouter {
+class VendaRouter {
   private _controller;
 
   private _route;
@@ -21,4 +21,4 @@ class ProdutoRouter {
   }
 }
 
-export default ProdutoRouter;
+export default VendaRouter;
