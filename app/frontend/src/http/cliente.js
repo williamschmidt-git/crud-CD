@@ -9,7 +9,7 @@ export async function findByName(name) {
   }
 }
 
-export async function criaCliente(cliente) {
+export async function createClient(cliente) {
   try {
     const response = await api.post('/', cliente);
     return response.data;
