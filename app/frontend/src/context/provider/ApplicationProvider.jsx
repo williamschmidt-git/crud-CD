@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import ApplicationContext from '../ApplicationContext';
 
 function ApplicationProvider({ children }) {
-  const contextValue = {
+  const [state, setState] = useState(0);
 
+  const contextValue = {
+    state,
+    setState,
   };
 
   return (
