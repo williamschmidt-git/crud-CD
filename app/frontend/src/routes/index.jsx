@@ -5,7 +5,7 @@ import MainPage from '../pages/MainPage';
 export default function Router() {
   return (
     <Routes>
-      <Route path="/login" element={ <MainPage /> } />
+      <Route path="/" element={ <MainPage /> } />
     </Routes>
   );
 }
