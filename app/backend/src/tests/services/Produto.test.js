@@ -135,7 +135,7 @@ describe('Produto Service', () => {
       (ProdutoModel.destroy).restore();
     });
 
-    it('Deve chamar a função "delete" e retornar uma mensagme de erro', async () => {
+    it('Deve chamar a função "delete" e retornar uma mensagem de erro', async () => {
       sinon.stub(ProdutoModel, 'destroy').resolves({ error: '"Produto" não encontrado' })
 
       const response = await service.delete('1000');

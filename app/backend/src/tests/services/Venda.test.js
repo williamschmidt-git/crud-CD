@@ -116,4 +116,38 @@ describe.only('Venda Service', () => {
       expect(response).to.be.deep.equal({ error: '"Venda" não encontrada' })
     });
   });
+
+  describe('delete endpoint. Em caso de sucesso:', () => {
+    afterEach(() => {
+      (VendaModel.destroy).restore();
+    });
+
+    it('Deve chamar a função "delete" e retornar um número', async () => {
+      sinon.stub(VendaModel, 'destroy').resolves(1)
+
+      const response = await service.delete('1');
+
+      expect(VendaModel.destroy.called).to.be.true;
+      expect(VendaModel.destroy).to.be.a('function');
+      expect(response).to.be.an('number')
+      expect(response).to.be.deep.equal(1)
+    });
+  });
+
+  describe('delete endpoint. Em caso de falha:', () => {
+    afterEach(() => {
+      (VendaModel.destroy).restore();
+    });
+
+    it('Deve chamar a função "delete" e retornar uma mensagem de erro', async () => {
+      sinon.stub(VendaModel, 'destroy').resolves({ error: '"Venda" não encontrada' })
+
+      const response = await service.delete('1000');
+
+      expect(VendaModel.destroy.called).to.be.false;
+      expect(VendaModel.destroy).to.be.a('function');
+      expect(response).to.be.an('Object')
+      expect(response).to.be.deep.equal({ error: '"Venda" não encontrada' })
+    });
+  });
 });
