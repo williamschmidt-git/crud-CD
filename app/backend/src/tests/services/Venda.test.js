@@ -12,7 +12,7 @@ const mock_test = {
   desc: 'Produto 1'
 }
 
-describe.only('Venda Service', () => {
+describe('Venda Service', () => {
   const service = new VendaService(VendaModel);
 
   describe('findAll endpoint. Em caso de sucesso:', () => {
@@ -148,6 +148,23 @@ describe.only('Venda Service', () => {
       expect(VendaModel.destroy).to.be.a('function');
       expect(response).to.be.an('Object')
       expect(response).to.be.deep.equal({ error: '"Venda" não encontrada' })
+    });
+  });
+
+  describe('create endpoint. Em caso de sucesso:', () => {
+    afterEach(() => {
+      (VendaModel.create).restore();
+    });
+
+    it('Deve chamar a função "create" e retornar o objeto criado', async () => {
+      sinon.stub(VendaModel, 'create').resolves(VENDA1_MOCK)
+
+      const response = await service.create(VENDA_CRIADA_MOCK);
+
+      expect(VendaModel.create.called).to.be.true;
+      expect(VendaModel.create).to.be.a('function');
+      expect(response).to.be.an('object')
+      expect(response).to.be.deep.equal(VENDA1_MOCK)
     });
   });
 });
