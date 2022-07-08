@@ -7,9 +7,11 @@ export default function Input({
   value,
   onChange,
   name,
+  id,
 }) {
   return (
     <input
+      id={ id }
       type={ type }
       placeholder={ placeholder }
       value={ value }
@@ -25,6 +27,7 @@ Input.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string,
+  id: PropTypes.string.isRequired,
 };
 
 Input.defaultProps = {

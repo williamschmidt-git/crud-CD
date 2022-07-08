@@ -1,7 +1,11 @@
 import React from 'react';
+import ButtonsToRedirect from '../../components/organisms/ButtonsToRedirect';
+import CentralizeTemplate from '../../templates/CentralizeTemplate';
 
 export default function MainPage() {
   return (
-    <>oi</>
+    <CentralizeTemplate>
+      <ButtonsToRedirect />
+    </CentralizeTemplate>
   );
 }
