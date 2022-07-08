@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Input from '../../components/atoms/Input';
 import ApplicationContext from '../../context/ApplicationContext';
 import Button from '../../components/atoms/Button';
@@ -11,6 +12,8 @@ export default function EditPage() {
     cidade: '',
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { value, name } = e.target;
     setEditedCustomer({
@@ -22,6 +25,10 @@ export default function EditPage() {
   const handleClick = (id) => {
     console.log(id);
     updateCustomer(id, editedCustomer);
+  };
+
+  const redirectPreviousPage = () => {
+    navigate('/customers');
   };
 
   return (
@@ -47,6 +54,7 @@ export default function EditPage() {
           ))}
         </div>
       )}
+      <Button text="Previous Page" onClick={ redirectPreviousPage } />
     </div>
   );
 }
