@@ -4,7 +4,7 @@ import Input from '../../components/atoms/Input';
 import Label from '../../components/atoms/Label';
 import Button from '../../components/atoms/Button';
 import ClientList from '../../components/organisms/ClientList';
-import { findByName } from '../../http/cliente';
+import { findByName, deleteCustomer } from '../../http/cliente';
 import ApplicationContext from '../../context/ApplicationContext';
 import DialogBox from '../../components/molecules/DialogBox/DialogBox';
 // import CentralizeTemplate from '../../templates/CentralizeTemplate';
@@ -38,10 +38,12 @@ export default function CustomerPage() {
     handleDialog('Você tem certeza que quer deletar este registro?', true);
     idProductRef.current = id;
   };
+
   const confirmDelete = (choose) => {
     if (choose) {
       setAllCustomers(allCustomers.filter((p) => p.idCliente !== idProductRef.current));
       handleDialog('', false);
+      deleteCustomer(idProductRef.current);
     } else {
       handleDialog('', false);
     }

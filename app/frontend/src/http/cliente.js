@@ -28,3 +28,12 @@ export async function updateCustomer(id, customer) {
     return { error: error.message };
   }
 }
+
+export async function deleteCustomer(id) {
+  try {
+    const response = await api.delete(`/cliente/${id}`);
+    return response.data;
+  } catch (error) {
+    return { error: error.message };
+  }
+}
