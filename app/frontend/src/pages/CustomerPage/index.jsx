@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import Input from '../../components/atoms/Input';
 import Label from '../../components/atoms/Label';
 import Button from '../../components/atoms/Button';
 import ClientList from '../../components/organisms/ClientList';
 import { findByName } from '../../http/cliente';
+import ApplicationContext from '../../context/ApplicationContext';
+import DialogBox from '../../components/molecules/DialogBox/DialogBox';
 // import CentralizeTemplate from '../../templates/CentralizeTemplate';
 
 export default function CustomerPage() {
   const navigate = useNavigate();
   const [inputName, setName] = useState('');
-  const [allCustomers, setAllCustomers] = useState([]);
+  const [dialog, setDialog] = useState({
+    message: '',
+    isLoading: false,
+  });
+  const { allCustomers, setAllCustomers } = useContext(ApplicationContext);
 
-  // useEffect(() => {
-  //   findByName(inputName).then((data) => setAllCustomers(data));
-  // }, [inputName]);
+  const idProductRef = useRef();
 
   function handleInput(e) {
     const { value, name } = e.target;
@@ -22,6 +26,26 @@ export default function CustomerPage() {
       [name]: value,
     });
   }
+
+  const handleDialog = (message, isLoading) => {
+    setDialog({
+      message,
+      isLoading,
+    });
+  };
+
+  const handleDelete = (id) => {
+    handleDialog('Você tem certeza que quer deletar este registro?', true);
+    idProductRef.current = id;
+  };
+  const confirmDelete = (choose) => {
+    if (choose) {
+      setAllCustomers(allCustomers.filter((p) => p.idCliente !== idProductRef.current));
+      handleDialog('', false);
+    } else {
+      handleDialog('', false);
+    }
+  };
 
   function redirectToForm() {
     navigate('/customers/create');
@@ -49,7 +73,12 @@ export default function CustomerPage() {
         <Button text="Criar novo usuário" onClick={ () => redirectToForm() } />
       </div>
 
-      <ClientList customers={ allCustomers } />
+      <ClientList customers={ allCustomers } handleDelete={ handleDelete } />
+      {dialog.isLoading && (
+        <DialogBox
+          onDialog={ confirmDelete }
+          message={ dialog.message }
+        />)}
     </div>
   );
 }
