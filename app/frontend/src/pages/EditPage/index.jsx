@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import Input from '../../components/atoms/Input';
 import ApplicationContext from '../../context/ApplicationContext';
 import Button from '../../components/atoms/Button';
+import { updateCustomer } from '../../http/cliente';
 
 export default function EditPage() {
   const { allCustomers } = useContext(ApplicationContext);
@@ -11,12 +12,16 @@ export default function EditPage() {
   });
 
   const handleChange = (e) => {
-    console.log(e);
     const { value, name } = e.target;
     setEditedCustomer({
       ...editedCustomer,
       [name]: value,
     });
+  };
+
+  const handleClick = (id) => {
+    console.log(id);
+    updateCustomer(id, editedCustomer);
   };
 
   return (
@@ -37,7 +42,7 @@ export default function EditPage() {
                 name="cidade"
                 onChange={ (e) => handleChange(e) }
               />
-              <Button text="Send" />
+              <Button text="Send" onClick={ () => handleClick(customer.idCliente) } />
             </div>
           ))}
         </div>

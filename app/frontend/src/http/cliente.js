@@ -11,11 +11,20 @@ export async function findByName(name) {
   }
 }
 
-export async function createClient(cliente) {
+export async function createCustomer(customer) {
   try {
-    const response = await api.post('/', cliente);
+    const response = await api.post('/', customer);
     return response.data;
   } catch (e) {
     return { error: e.message };
+  }
+}
+
+export async function updateCustomer(id, customer) {
+  try {
+    const response = await api.patch(`/cliente/${id}`, customer);
+    return response.data;
+  } catch (error) {
+    return { error: error.message };
   }
 }
