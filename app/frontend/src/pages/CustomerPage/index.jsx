@@ -4,31 +4,31 @@ import Input from '../../components/atoms/Input';
 import Label from '../../components/atoms/Label';
 import Button from '../../components/atoms/Button';
 import ClientList from '../../components/organisms/ClientList';
+import { findByName } from '../../http/cliente';
 // import CentralizeTemplate from '../../templates/CentralizeTemplate';
 
 export default function CustomerPage() {
   const navigate = useNavigate();
   const [inputName, setName] = useState('');
-  const [isDisabled, setIsDisabled] = useState(true);
-  const SIX = 6;
+  const [allCustomers, setAllCustomers] = useState([]);
 
-  function handleDisabled() {
-    if (inputName.inputName.length > SIX) {
-      setIsDisabled(false);
-    }
-  }
+  // useEffect(() => {
+  //   findByName(inputName).then((data) => setAllCustomers(data));
+  // }, [inputName]);
 
   function handleInput(e) {
     const { value, name } = e.target;
     setName({
       [name]: value,
     });
-
-    handleDisabled();
   }
 
   function redirectToForm() {
     navigate('/customers/create');
+  }
+
+  function searchByName() {
+    findByName(inputName.inputName).then((data) => setAllCustomers(data));
   }
 
   return (
@@ -42,14 +42,14 @@ export default function CustomerPage() {
           onChange={ (e) => handleInput(e) }
           placeholder="Fulana da Silva"
         />
-        <Button disabled={ isDisabled } text="Enviar" />
+        <Button text="Enviar" onClick={ () => searchByName() } />
       </Label>
 
       <div>
         <Button text="Criar novo usuário" onClick={ () => redirectToForm() } />
       </div>
 
-      <ClientList />
+      <ClientList customers={ allCustomers } />
     </div>
   );
 }
