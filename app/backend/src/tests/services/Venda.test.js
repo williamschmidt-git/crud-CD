@@ -66,23 +66,6 @@ describe('Venda Service', () => {
     });
   });
 
-  describe('findBy endpoint. Em caso de falha:', () => {
-    afterEach(() => {
-      (VendaModel.findAll).restore();
-    });
-
-    it('Deve chamar a função "findBy" e retornar um Objeto com mensagem de erro', async () => {
-      sinon.stub(VendaModel, 'findAll').resolves({ error: '"Produto" não encontrado' })
-
-      const response = await service.findBy({ desc: 'Produto 1000'});
-
-      expect(VendaModel.findAll.called).to.be.false;
-      expect(VendaModel.findAll).to.be.a('function');
-      expect(response).to.be.an('Object')
-      expect(response).to.be.deep.equal({ error: '"Produto" não encontrado' })
-    });
-  });
-
   describe('update endpoint. Em caso de sucesso:', () => {
     afterEach(() => {
       (VendaModel.update).restore();

@@ -35,7 +35,7 @@ class ProdutoService implements Service<Iproduto> {
       },
     }, raw: true });
 
-    if (!produto) return { error: 'Não encontrado ' };
+    if (produto.length < 1) return { error: 'Não encontrado ' };
 
     return produto;
   }

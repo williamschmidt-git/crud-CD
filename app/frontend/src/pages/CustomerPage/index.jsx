@@ -8,7 +8,6 @@ import { findByName, deleteCustomer } from '../../http/cliente';
 import ApplicationContext from '../../context/ApplicationContext';
 import DialogBox from '../../components/molecules/DialogBox/DialogBox';
 import RedirectToMainPage from '../../components/molecules/RedirectToMainPage';
-// import CentralizeTemplate from '../../templates/CentralizeTemplate';
 
 export default function CustomerPage() {
   const navigate = useNavigate();
@@ -56,6 +55,7 @@ export default function CustomerPage() {
 
   function searchByName() {
     findByName(inputName.inputName).then((data) => setAllCustomers(data));
+    console.log(allCustomers);
   }
 
   return (

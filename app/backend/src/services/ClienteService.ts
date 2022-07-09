@@ -25,7 +25,7 @@ class ClienteService implements Service<Icliente> {
       [Op.like]: `%${name}%`,
     } }, raw: true });
 
-    if (!cliente) return { error: 'Não encontrado ' };
+    if (cliente.length < 1) return { error: 'Não encontrado ' };
 
     return cliente;
   }

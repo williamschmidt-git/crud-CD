@@ -4,22 +4,33 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../atoms/Button';
 import TextTitle from '../../atoms/TextTitle';
-import { findAllSales } from '../../../http/sale';
+import { findAllSalesByCustomer, findAllSalesByProduct } from '../../../http/sale';
 import ApplicationContext from '../../../context/ApplicationContext';
 
-export default function SaleList({ sales, handleDelete }) {
+export default function SaleList({ sales, handleDelete, productOrCustomer }) {
   const navigate = useNavigate();
   const { allSales, setAllSales } = useContext(ApplicationContext);
 
-  const newSales = useCallback(async () => {
+  const newSalesByCustomer = useCallback(async () => {
     sales.map(async (e) => {
-      setAllSales(await findAllSales(e.idCliente));
+      setAllSales(await findAllSalesByCustomer(e.idCliente));
+    });
+  }, [sales, setAllSales]);
+
+  const newSalesByProduct = useCallback(async () => {
+    sales.map(async (e) => {
+      setAllSales(await findAllSalesByProduct(e.idProduto));
     });
   }, [sales, setAllSales]);
 
   useEffect(() => {
-    newSales();
-  }, [newSales]);
+    if (productOrCustomer.includes('Cliente')) {
+      newSalesByCustomer();
+    }
+    if (productOrCustomer.includes('Produto')) {
+      newSalesByProduct();
+    }
+  }, [newSalesByCustomer, productOrCustomer, newSalesByProduct]);
 
   function manipulateDateString(string) {
     const newString = string.split('T');
@@ -92,4 +103,5 @@ export default function SaleList({ sales, handleDelete }) {
 SaleList.propTypes = {
   sales: PropTypes.node.isRequired,
   handleDelete: PropTypes.func.isRequired,
+  productOrCustomer: PropTypes.string.isRequired,
 };
