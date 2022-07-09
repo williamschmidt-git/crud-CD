@@ -2,10 +2,10 @@ import React, { useContext, useRef, useState } from 'react';
 import Label from '../../components/atoms/Label';
 import Input from '../../components/atoms/Input';
 import Button from '../../components/atoms/Button';
-// import ProductList from '../../organisms/ProductList';
 import DialogBox from '../../components/molecules/DialogBox/DialogBox';
 import ApplicationContext from '../../context/ApplicationContext';
 import { findByName } from '../../http/produto';
+import ProductList from '../../components/organisms/ProductList';
 
 export default function ProductPage() {
   const [inputProduct, setName] = useState('');
@@ -13,10 +13,10 @@ export default function ProductPage() {
     message: '',
     isLoading: false,
   });
-  const { allProduct, setAllProducts } = useContext(ApplicationContext);
+  const { allProducts, setAllProducts } = useContext(ApplicationContext);
 
   const idClienteRef = useRef();
-  console.log(inputProduct);
+  console.log(allProducts);
 
   function handleInput(e) {
     const { value, name } = e.target;
@@ -32,14 +32,14 @@ export default function ProductPage() {
     });
   };
 
-  // const handleDelete = (id) => {
-  //   handleDialog('Você tem certeza que quer deletar este registro?', true);
-  //   idClienteRef.current = id;
-  // };
+  const handleDelete = (id) => {
+    handleDialog('Você tem certeza que quer deletar este registro?', true);
+    idClienteRef.current = id;
+  };
 
   const confirmDelete = (choose) => {
     if (choose) {
-      setAllProducts(allProduct.filter((p) => p.idProduto !== idClienteRef.current));
+      setAllProducts(allProducts.filter((p) => p.idProduto !== idClienteRef.current));
       handleDialog('', false);
       deleteCustomer(idClienteRef.current);
     } else {
@@ -69,7 +69,7 @@ export default function ProductPage() {
         <Button text="Criar novo Produto" onClick={ () => redirectToForm() } />
       </div>
 
-      {/* <ClientList customers={ allCustomers } handleDelete={ handleDelete } /> */}
+      <ProductList products={ allProducts } handleDelete={ handleDelete } />
       {dialog.isLoading && (
         <DialogBox
           onDialog={ confirmDelete }
