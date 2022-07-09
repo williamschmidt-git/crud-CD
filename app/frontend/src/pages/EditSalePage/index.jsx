@@ -3,59 +3,73 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../components/atoms/Input';
 import ApplicationContext from '../../context/ApplicationContext';
 import Button from '../../components/atoms/Button';
-import { updateProduct } from '../../http/produto';
+import { updateSale } from '../../http/sale';
 import RedirectToMainPage from '../../components/molecules/RedirectToMainPage';
 
 export default function EditSalePage() {
   const { allSales } = useContext(ApplicationContext);
-  const [editedProduct, setEditedProduct] = useState({
+  const [editedSale, setEditedSale] = useState({
+    nmCliente: '',
     dscProduto: '',
     vlrUnitario: 0,
+    qtdVenda: 0,
   });
+  console.log(editedSale);
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
-    setEditedProduct({
-      ...editedProduct,
+    setEditedSale({
+      ...editedSale,
       [name]: value,
     });
   };
 
   const handleClick = (id) => {
-    console.log(id);
-    updateProduct(id, editedProduct);
+    updateSale(id, editedSale);
   };
 
   const redirectPreviousPage = () => {
-    navigate('/products');
+    navigate('/sales');
   };
 
   return (
     <div>
-      {allProducts && (
+      {allSales && (
         <div>
-          { allProducts.map((product, index) => (
+          { allSales.map((sale, index) => (
             <div key={ index }>
               <Input
                 type="text"
-                placeholder={ product.dscProduto }
+                placeholder={ sale.cliente.nmCliente }
+                name="nmCliente"
+                onChange={ (e) => handleChange(e) }
+              />
+              <Input
+                type="text"
+                placeholder={ sale.produto.dscProduto }
                 name="dscProduto"
                 onChange={ (e) => handleChange(e) }
               />
               <Input
                 type="text"
-                placeholder={ product.vlrUnitario }
+                placeholder={ sale.produto.vlrUnitario }
                 name="vlrUnitario"
                 onChange={ (e) => handleChange(e) }
               />
-              <Button text="Send" onClick={ () => handleClick(product.idProduto) } />
+              <Input
+                type="text"
+                placeholder={ sale.qtdVenda }
+                name="qtdVenda"
+                onChange={ (e) => handleChange(e) }
+              />
+              <Button text="Enviar" onClick={ () => handleClick(sale.idProduto) } />
             </div>
           ))}
         </div>
       )}
-      <Button text="Previous Page" onClick={ redirectPreviousPage } />
+      <Button text="Página anterior" onClick={ redirectPreviousPage } />
       <RedirectToMainPage />
     </div>
   );

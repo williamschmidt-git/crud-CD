@@ -50,12 +50,12 @@ export default function EditProductsPage() {
                 name="vlrUnitario"
                 onChange={ (e) => handleChange(e) }
               />
-              <Button text="Send" onClick={ () => handleClick(product.idProduto) } />
+              <Button text="Enviar" onClick={ () => handleClick(product.idProduto) } />
             </div>
           ))}
         </div>
       )}
-      <Button text="Previous Page" onClick={ redirectPreviousPage } />
+      <Button text="Página anterior" onClick={ redirectPreviousPage } />
       <RedirectToMainPage />
     </div>
   );

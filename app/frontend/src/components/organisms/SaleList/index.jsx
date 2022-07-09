@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../atoms/Button';
 import TextTitle from '../../atoms/TextTitle';
 import { findAllSales } from '../../../http/sale';
 import ApplicationContext from '../../../context/ApplicationContext';
 
 export default function SaleList({ sales, handleDelete }) {
+  const navigate = useNavigate();
   const { allSales, setAllSales } = useContext(ApplicationContext);
 
   const newSales = useCallback(async () => {
@@ -14,7 +16,6 @@ export default function SaleList({ sales, handleDelete }) {
       setAllSales(await findAllSales(e.idCliente));
     });
   }, [sales, setAllSales]);
-  console.log(allSales);
 
   useEffect(() => {
     newSales();
@@ -23,6 +24,10 @@ export default function SaleList({ sales, handleDelete }) {
   function manipulateDateString(string) {
     const newString = string.split('T');
     return newString[0];
+  }
+
+  function handleEditButton() {
+    navigate('/sales/edit');
   }
 
   return (

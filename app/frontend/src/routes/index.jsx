@@ -8,6 +8,7 @@ import SalesPage from '../pages/SalesPage';
 import ProductPage from '../pages/ProductPage';
 import CreateProductsPage from '../pages/CreateProductsPage';
 import EditProductsPage from '../pages/EditProductsPage';
+import EditSalePage from '../pages/EditSalePage';
 
 export default function Router() {
   return (
@@ -20,6 +21,7 @@ export default function Router() {
       <Route path="/products/create" element={ <CreateProductsPage /> } />
       <Route path="/products/edit" element={ <EditProductsPage /> } />
       <Route path="/sales/" element={ <SalesPage /> } />
+      <Route path="/sales/edit" element={ <EditSalePage /> } />
     </Routes>
   );
 }

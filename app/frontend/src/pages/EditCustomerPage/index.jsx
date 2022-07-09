@@ -55,7 +55,7 @@ export default function EditCustomerPage() {
           ))}
         </div>
       )}
-      <Button text="Previous Page" onClick={ redirectPreviousPage } />
+      <Button text="Página anterior" onClick={ redirectPreviousPage } />
       <RedirectToMainPage />
     </div>
   );
