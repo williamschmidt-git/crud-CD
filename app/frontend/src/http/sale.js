@@ -25,6 +25,16 @@ export async function findSale(id) {
   }
 }
 
+export async function findAllSales(id) {
+  try {
+    const response = await api.get(`/venda/cliente/${id}`);
+    // console.log(response.data);
+    return response.data;
+  } catch (e) {
+    return { error: e.message };
+  }
+}
+
 export async function createCustomer(customer) {
   try {
     const response = await api.post('/cliente/', customer);

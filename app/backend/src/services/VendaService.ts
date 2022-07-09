@@ -23,6 +23,19 @@ class VendaService {
     return vendas;
   }
 
+  public async findByCustomer(id: string): Promise<Ivenda[] | Ierror> {
+    const vendas = await this._model.findAll({ where: { idCliente: id }, 
+      include: [
+        { model: Cliente, as: 'cliente' },
+        { model: Produto, as: 'produto' },
+      ],
+    });
+
+    if (!vendas) return { error: 'Não encontrado' };
+
+    return vendas;
+  }
+
   public async findBy(query): Promise<Ivenda | Ierror> {
     const [paramKey] = Object.keys(query);
     if (paramKey  === 'desc') {

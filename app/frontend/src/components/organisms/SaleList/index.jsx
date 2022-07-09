@@ -3,30 +3,26 @@ import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../atoms/Button';
 import TextTitle from '../../atoms/TextTitle';
-import { findSale } from '../../../http/sale';
+import { findAllSales, findSale } from '../../../http/sale';
 // import { findById } from '../../../http/produto';
 // import { findById } from '../../../http/produto';
 
 export default function SaleList({ sales, handleDelete }) {
-  const [allSales, setAllSales] = useState([]);
-  // console.log(setAllSales);
+  const [allSales, setAllSales] = useState();
 
-  const getSaleData = useCallback(async (id) => {
-    await findSale(id).then((data) => {
-      setAllSales(data[0]);
-      console.log(data[0]);
-    });
-  }, []);
-
-  const loop = () => sales.map((e) => getSaleData(e.idVenda));
+  const newSales = async () => {
+    setAllSales(await findAllSales(1));
+  };
 
   useEffect(() => {
-    setAllSales(loop());
-
-    // getSaleData(1).then((data) => setAllSales(...data));
+    newSales();
   }, []);
 
-  console.log(allSales);
+  function manipulateDateString(string) {
+    const newString = string.split('T');
+    console.log(newString);
+    return newString[0];
+  }
 
   return (
     sales.length > 0 ? (
@@ -43,7 +39,7 @@ export default function SaleList({ sales, handleDelete }) {
             </tr>
           </thead>
           <tbody>
-            {sales.map((sale, index) => (
+            {allSales.map((sale, index) => (
               <tr key={ index }>
                 <td>
                   <TextTitle>
@@ -52,7 +48,27 @@ export default function SaleList({ sales, handleDelete }) {
                 </td>
                 <td>
                   <TextTitle>
-                    { sale.cidade }
+                    { sale.produto.dscProdut }
+                  </TextTitle>
+                </td>
+                <td>
+                  <TextTitle>
+                    { sale.qtdVenda }
+                  </TextTitle>
+                </td>
+                <td>
+                  <TextTitle>
+                    { sale.vlrUnitarioVenda }
+                  </TextTitle>
+                </td>
+                <td>
+                  <TextTitle>
+                    { manipulateDateString(sale.dthVenda)}
+                  </TextTitle>
+                </td>
+                <td>
+                  <TextTitle>
+                    { (sale.qtdVenda * sale.vlrUnitarioVenda).toFixed(2)}
                   </TextTitle>
                 </td>
                 <Button text="Editar" onClick={ () => handleEditButton() } />
