@@ -6,7 +6,6 @@ import TextTitle from '../../atoms/TextTitle';
 
 export default function ProductList({ products, handleDelete }) {
   const navigate = useNavigate();
-  console.log(products);
 
   function handleEditButton() {
     navigate('/products/edit');

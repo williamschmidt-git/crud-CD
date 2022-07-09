@@ -1,13 +1,15 @@
 import React, { useContext, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
 import Label from '../../components/atoms/Label';
 import Input from '../../components/atoms/Input';
 import Button from '../../components/atoms/Button';
 import DialogBox from '../../components/molecules/DialogBox/DialogBox';
 import ApplicationContext from '../../context/ApplicationContext';
-import { findByName } from '../../http/produto';
 import ProductList from '../../components/organisms/ProductList';
+import { findByName, deleteProduct } from '../../http/produto';
 
 export default function ProductPage() {
+  const navigate = useNavigate();
   const [inputProduct, setName] = useState('');
   const [dialog, setDialog] = useState({
     message: '',
@@ -16,7 +18,6 @@ export default function ProductPage() {
   const { allProducts, setAllProducts } = useContext(ApplicationContext);
 
   const idClienteRef = useRef();
-  console.log(allProducts);
 
   function handleInput(e) {
     const { value, name } = e.target;
@@ -37,11 +38,15 @@ export default function ProductPage() {
     idClienteRef.current = id;
   };
 
+  function redirectToForm() {
+    navigate('/products/create');
+  }
+
   const confirmDelete = (choose) => {
     if (choose) {
       setAllProducts(allProducts.filter((p) => p.idProduto !== idClienteRef.current));
       handleDialog('', false);
-      deleteCustomer(idClienteRef.current);
+      deleteProduct(idClienteRef.current);
     } else {
       handleDialog('', false);
     }
