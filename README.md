@@ -34,7 +34,10 @@ Execução:
 
 ####
 Seeders:
+  
   <img src="./imgs/Clientes.png">
+  <img src="./imgs/Produtos.png">
+  <img src="./imgs/Vendas.png">
 
 
 ####
