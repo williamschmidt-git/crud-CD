@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../atoms/Button';
 import TextTitle from '../../atoms/TextTitle';
+import { findSale } from '../../../http/sale';
 // import { findById } from '../../../http/produto';
 // import { findById } from '../../../http/produto';
 
 export default function SaleList({ sales, handleDelete }) {
   // const [foundProducts, setFoundProducts] = useState([]);
-  // const [allSales, setAllSales] = useState([]);
+  const [allSales, setAllSales] = useState([]);
   // const [singleSale, setSingleSale] = useState({
   //   nmCliente: '',
   //   nmProduto: '',
@@ -16,6 +17,16 @@ export default function SaleList({ sales, handleDelete }) {
   //   data: '',
   //   total: 0,
   // });
+
+  console.log(allSales);
+
+  const getSaleData = useCallback(async (id) => {
+    await findSale(id).then((data) => setAllSales(data));
+  }, []);
+
+  useEffect(() => {
+    getSaleData(1).then((data) => setAllSales(data));
+  }, []);
 
   return (
     sales.length > 0 ? (
