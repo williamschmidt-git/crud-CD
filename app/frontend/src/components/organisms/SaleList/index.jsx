@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../atoms/Button';
@@ -7,26 +8,25 @@ import { findSale } from '../../../http/sale';
 // import { findById } from '../../../http/produto';
 
 export default function SaleList({ sales, handleDelete }) {
-  // const [foundProducts, setFoundProducts] = useState([]);
   const [allSales, setAllSales] = useState([]);
-  // const [singleSale, setSingleSale] = useState({
-  //   nmCliente: '',
-  //   nmProduto: '',
-  //   quantidade: 0,
-  //   valor: 0,
-  //   data: '',
-  //   total: 0,
-  // });
-
-  console.log(allSales);
+  // console.log(setAllSales);
 
   const getSaleData = useCallback(async (id) => {
-    await findSale(id).then((data) => setAllSales(data));
+    await findSale(id).then((data) => {
+      setAllSales(data[0]);
+      console.log(data[0]);
+    });
   }, []);
 
+  const loop = () => sales.map((e) => getSaleData(e.idVenda));
+
   useEffect(() => {
-    getSaleData(1).then((data) => setAllSales(data));
+    setAllSales(loop());
+
+    // getSaleData(1).then((data) => setAllSales(...data));
   }, []);
+
+  console.log(allSales);
 
   return (
     sales.length > 0 ? (

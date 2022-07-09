@@ -18,6 +18,7 @@ export async function findByName(name) {
 export async function findSale(id) {
   try {
     const response = await api.get(`/venda/${id}`);
+    // console.log(response.data);
     return response.data;
   } catch (e) {
     return { error: e.message };
