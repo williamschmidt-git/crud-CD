@@ -26,9 +26,11 @@ Tecnologias:
 
 ####
 Execução:
-  Após instalação das dependências, na pasta raiz do projeto rodar ```npm start```
-  Para verificar a execução do frontend: ```http://localhost:3000```
+  Após instalação das dependências, na pasta raiz do projeto rodar ```npm start```.
+  
+  Para verificar a execução do frontend: ```http://localhost:3000```;
 
 
 ####
 Explicação do projeto: 
+WIP
