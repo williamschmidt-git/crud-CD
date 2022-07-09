@@ -5,6 +5,7 @@ import CustomerPage from '../pages/CustomerPage';
 import EditCustomerPage from '../pages/EditCustomerPage';
 import CreateCustomerPage from '../pages/CreateCustomerPage';
 import SalesPage from '../pages/SalesPage';
+import ProductPage from '../pages/ProductPage';
 
 export default function Router() {
   return (
@@ -13,6 +14,7 @@ export default function Router() {
       <Route path="/customers" element={ <CustomerPage /> } />
       <Route path="/customers/edit" element={ <EditCustomerPage /> } />
       <Route path="/customers/create" element={ <CreateCustomerPage /> } />
+      <Route path="/products" element={ <ProductPage /> } />
       <Route path="/sales/" element={ <SalesPage /> } />
     </Routes>
   );

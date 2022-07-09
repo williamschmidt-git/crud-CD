@@ -12,7 +12,16 @@ export async function findById(id) {
 export async function createSale(product) {
   try {
     const response = await api.post('/produto/', product);
-    console.log(response);
+    return response.data;
+  } catch (e) {
+    return { error: e.message };
+  }
+}
+
+export async function findByName(name) {
+  try {
+    const response = await api.get(`/produto/list?desc=${name}`);
+    console.log(response.data);
     return response.data;
   } catch (e) {
     return { error: e.message };
