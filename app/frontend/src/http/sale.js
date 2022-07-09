@@ -19,7 +19,6 @@ export async function findByName(name) {
 export async function createCustomer(customer) {
   try {
     const response = await api.post('/cliente/', customer);
-    console.log(response);
     return response.data;
   } catch (e) {
     return { error: e.message };
