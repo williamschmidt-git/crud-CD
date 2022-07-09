@@ -23,8 +23,6 @@ export default function CreateCustomerPage() {
     });
   };
 
-  console.log(newCustomer);
-
   return (
     <div>
       <form onSubmit={ handleSubmit }>

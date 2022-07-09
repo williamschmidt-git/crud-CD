@@ -21,7 +21,6 @@ export async function createSale(product) {
 export async function findByName(name) {
   try {
     const response = await api.get(`/produto/list?desc=${name}`);
-    console.log(response.data);
     return response.data;
   } catch (e) {
     return { error: e.message };
@@ -57,7 +56,6 @@ export async function createProduct(product) {
       vlrUnitario: Number(product.vlrUnitario),
     };
     const response = await api.post('/produto/', newProduct);
-    console.log(response);
     return response.data;
   } catch (e) {
     return { error: e.message };

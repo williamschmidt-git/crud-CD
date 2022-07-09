@@ -24,7 +24,6 @@ export default function EditProductsPage() {
   };
 
   const handleClick = (id) => {
-    console.log(id);
     updateProduct(id, editedProduct);
   };
 

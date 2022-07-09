@@ -14,7 +14,6 @@ export default function EditSalePage() {
     vlrUnitario: 0,
     qtdVenda: 0,
   });
-  console.log(editedSale);
 
   const navigate = useNavigate();
 

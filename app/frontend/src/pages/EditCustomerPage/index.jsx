@@ -24,7 +24,6 @@ export default function EditCustomerPage() {
   };
 
   const handleClick = (id) => {
-    console.log(id);
     updateCustomer(id, editedCustomer);
   };
 

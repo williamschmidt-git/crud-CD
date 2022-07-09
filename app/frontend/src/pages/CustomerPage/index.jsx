@@ -55,7 +55,6 @@ export default function CustomerPage() {
 
   function searchByName() {
     findByName(inputName.inputName).then((data) => setAllCustomers(data));
-    console.log(allCustomers);
   }
 
   return (
