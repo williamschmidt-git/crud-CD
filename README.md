@@ -28,7 +28,9 @@ Tecnologias:
 Execução:
   Após instalação das dependências, na pasta raiz do projeto rodar ```npm start```.
   
-  Para verificar a execução do frontend: ```http://localhost:3000```;
+  Para verificar a execução do frontend: ```http://localhost:3000```.
+  
+  Para parar a execução dos containers: ```npm run compose:down```, na pasta raiz do projeto.
 
 
 ####
