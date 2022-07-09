@@ -7,8 +7,8 @@ Este projeto é um Crud de Clientes, Produtos e Vendas.
 ###
 Dependências:
    - NodeJs v16
-   - Docker version 20
-   - Docker-compose 1.29
+   - Docker v20
+   - Docker-compose v1.29
 
 ###
 Tecnologias:
