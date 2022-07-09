@@ -42,6 +42,10 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
+      vlrTotalVenda: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      }
     });
   },
 

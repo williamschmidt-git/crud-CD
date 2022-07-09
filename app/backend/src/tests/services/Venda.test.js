@@ -74,9 +74,9 @@ describe('Venda Service', () => {
     it('Deve chamar a função "findBy" e retornar um Objeto com mensagem de erro', async () => {
       sinon.stub(VendaModel, 'findAll').resolves({ error: '"Produto" não encontrado' })
 
-      const response = await service.findBy({ desc: 'Produto 100000'});
+      const response = await service.findBy({ desc: 'Produto 1000'});
 
-      expect(VendaModel.findAll.called).to.be.true;
+      expect(VendaModel.findAll.called).to.be.false;
       expect(VendaModel.findAll).to.be.a('function');
       expect(response).to.be.an('Object')
       expect(response).to.be.deep.equal({ error: '"Produto" não encontrado' })

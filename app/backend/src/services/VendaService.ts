@@ -24,10 +24,9 @@ class VendaService {
   }
 
   public async findBy(query): Promise<Ivenda | Ierror> {
-    console.log(query);
     const [paramKey] = Object.keys(query);
     if (paramKey  === 'desc') {
-      const produtos = this.byDesc(query);
+      const produtos = await this.byDesc(query);
       if (!produtos) return { error: '"Produto" não encontrado' };
       return produtos;
     }
@@ -84,20 +83,22 @@ class VendaService {
     return vendas;
   }
 
-  private async byDesc({ desc }): Promise<Ivenda | Ierror> {
+  public async byDesc({ desc }): Promise<Ivenda | Ierror> {
     const produto = await this.findProduto(desc);
 
     const [...foundProduto] = produto as Iproduto[];
 
-    const idProduto = foundProduto[0].idProduto;
+    if (foundProduto.length >= 1 ) {
+      const idProduto = foundProduto[0].idProduto;
+      const vendas = await this._model.findAll({ where: { idProduto }, include: [{
+        model: Produto, as: 'produto', attributes: { excludes: ['idProduto'] },
+      }] });
 
-    if (!idProduto) return { error: '"Produto" não encontrado' };
+      return vendas;
+    } else {
+      return { error: '"Produto" não encontrado' };
+    }
 
-    const vendas = await this._model.findAll({ where: { idProduto }, include: [{
-      model: Produto, as: 'produto', attributes: { excludes: ['idProduto'] },
-    }] });
-
-    return vendas;
   }
 
   private async findCliente(name: string): Promise<Icliente[] | Ierror> {
