@@ -1,22 +1,33 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../atoms/Button';
 import TextTitle from '../../atoms/TextTitle';
-import { findAllSales, findSale } from '../../../http/sale';
+import { findAllSales } from '../../../http/sale';
+import ApplicationContext from '../../../context/ApplicationContext';
 // import { findById } from '../../../http/produto';
 // import { findById } from '../../../http/produto';
 
 export default function SaleList({ sales, handleDelete }) {
-  const [allSales, setAllSales] = useState();
+  // const [allSales, setAllSales] = useState();
+  const { allSales, setAllSales } = useContext(ApplicationContext);
 
-  const newSales = async () => {
-    setAllSales(await findAllSales(1));
-  };
+  // const newSales = async () => {
+  //   sales.map(async (e) => {
+  //     setAllSales(await findAllSales(e.idCliente));
+  //   });
+  // };
+
+  const newSales = useCallback(async () => {
+    sales.map(async (e) => {
+      setAllSales(await findAllSales(e.idCliente));
+    });
+  }, [sales, setAllSales]);
+  console.log(allSales);
 
   useEffect(() => {
     newSales();
-  }, []);
+  }, [newSales]);
 
   function manipulateDateString(string) {
     const newString = string.split('T');
@@ -39,7 +50,7 @@ export default function SaleList({ sales, handleDelete }) {
             </tr>
           </thead>
           <tbody>
-            {allSales.map((sale, index) => (
+            { allSales !== undefined && allSales.map((sale, index) => (
               <tr key={ index }>
                 <td>
                   <TextTitle>

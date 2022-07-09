@@ -5,12 +5,15 @@ import ApplicationContext from '../ApplicationContext';
 function ApplicationProvider({ children }) {
   const [allCustomers, setAllCustomers] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const [allSales, setAllSales] = useState();
 
   const contextValue = {
     allCustomers,
     setAllCustomers,
     allProducts,
     setAllProducts,
+    allSales,
+    setAllSales,
   };
 
   return (

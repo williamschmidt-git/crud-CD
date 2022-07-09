@@ -15,16 +15,6 @@ export async function findByName(name) {
   }
 }
 
-export async function findSale(id) {
-  try {
-    const response = await api.get(`/venda/${id}`);
-    // console.log(response.data);
-    return response.data;
-  } catch (e) {
-    return { error: e.message };
-  }
-}
-
 export async function findAllSales(id) {
   try {
     const response = await api.get(`/venda/cliente/${id}`);
@@ -35,27 +25,27 @@ export async function findAllSales(id) {
   }
 }
 
-export async function createCustomer(customer) {
+export async function createSale(sale) {
   try {
-    const response = await api.post('/cliente/', customer);
+    const response = await api.post('/venda/', sale);
     return response.data;
   } catch (e) {
     return { error: e.message };
   }
 }
 
-export async function updateCustomer(id, customer) {
+export async function updateSale(id, sale) {
   try {
-    const response = await api.patch(`/cliente/${id}`, customer);
+    const response = await api.patch(`/venda/${id}`, sale);
     return response.data;
   } catch (error) {
     return { error: error.message };
   }
 }
 
-export async function deleteCustomer(id) {
+export async function deleteSale(id) {
   try {
-    const response = await api.delete(`/cliente/${id}`);
+    const response = await api.delete(`/venda/${id}`);
     return response.data;
   } catch (error) {
     return { error: error.message };

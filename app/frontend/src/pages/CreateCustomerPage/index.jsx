@@ -50,7 +50,7 @@ export default function CreateCustomerPage() {
             />
           </label>
         </div>
-        <Button type="submit" text="Send" />
+        <Button type="submit" text="Enviar" />
       </form>
       <RedirectToMainPage />
 

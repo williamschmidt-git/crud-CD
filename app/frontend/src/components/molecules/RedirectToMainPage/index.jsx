@@ -10,6 +10,6 @@ export default function RedirectToMainPage() {
     navigate('/');
   };
   return (
-    <Button text="MainPage" onClick={ () => redirect() } />
+    <Button text="Página inicial" onClick={ () => redirect() } />
   );
 }
