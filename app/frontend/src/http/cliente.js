@@ -13,7 +13,7 @@ export async function findByName(name) {
 
 export async function createCustomer(customer) {
   try {
-    const response = await api.post('/', customer);
+    const response = await api.post('/cliente/', customer);
     return response.data;
   } catch (e) {
     return { error: e.message };
