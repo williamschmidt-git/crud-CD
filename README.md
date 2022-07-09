@@ -7,8 +7,8 @@ Este projeto é um Crud de Clientes, Produtos e Vendas.
 ###
 Dependências:
    - NodeJs v16
-   - Docker version 20
-   - Docker-compose 1.29
+   - Docker v20
+   - Docker-compose v1.29
 
 ###
 Tecnologias:
@@ -26,8 +26,11 @@ Tecnologias:
 
 ####
 Execução:
-  Após instalação das dependências, na pasta raiz do projeto rodar ```npm start```
-  Para verificar a execução do frontend: ```http://localhost:3000```
+  Após instalação das dependências, na pasta raiz do projeto rodar ```npm start```.
+  
+  Para verificar a execução do frontend: ```http://localhost:3000```.
+  
+  Para parar a execução dos containers: ```npm run compose:down```, na pasta raiz do projeto.
 
 ####
 Seeders:
@@ -36,3 +39,4 @@ Seeders:
 
 ####
 Explicação do projeto: 
+WIP
