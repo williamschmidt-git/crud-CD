@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import Input from '../../components/atoms/Input';
 import Button from '../../components/atoms/Button';
 import { findByName } from '../../http/sale';
+import SaleList from '../../components/organisms/SaleList';
 
 export default function SalesPage() {
   const [customerOrProduct, setCustomerOrProduct] = useState('Cliente');
   const [inputBox, setInputBox] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [allSales, setAllSales] = useState([]);
-  console.log(allSales);
 
   const handleSelect = (e) => {
     const { value } = e.target;
@@ -69,6 +69,7 @@ export default function SalesPage() {
         {customerOrProduct && (listenerCustomerOrProduct())}
         <Button type="submit" text="Enviar" onClick={ (e) => searchByName(e) } />
       </form>
+      <SaleList sales={ allSales } />
     </div>
   );
 }

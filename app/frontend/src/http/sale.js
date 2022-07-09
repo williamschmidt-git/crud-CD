@@ -2,7 +2,6 @@ import api from '../api';
 
 export async function findByName(name) {
   try {
-    console.log(name);
     if (name.nome) {
       const response = await api.get(`/venda/list?nome=${name.nome}`);
       return response.data;
@@ -11,6 +10,15 @@ export async function findByName(name) {
       const response = await api.get(`/venda/list?desc=${name.desc}`);
       return response.data;
     }
+  } catch (e) {
+    return { error: e.message };
+  }
+}
+
+export async function findSale(id) {
+  try {
+    const response = await api.post(`/venda/${id}`);
+    return response.data;
   } catch (e) {
     return { error: e.message };
   }

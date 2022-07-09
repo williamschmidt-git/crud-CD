@@ -25,6 +25,15 @@ class VendaController implements Icontroller {
     return res.status(200).json(response);
   };
 
+  public findSale = async (req: Request, res: Response): Promise<Response> => {
+    const { id } = req.params;
+    const response = await this._service.findSale(id);
+
+    if (response.error) return res.status(404).json(response.error);
+
+    return res.status(200).json(response);
+  };
+
   public update = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
     const obj = req.body;

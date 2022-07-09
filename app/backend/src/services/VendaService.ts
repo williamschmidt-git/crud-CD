@@ -118,6 +118,19 @@ class VendaService {
 
     return produto;
   }
+
+  public async findSale(id: string): Promise<Ivenda[] | Ierror> {
+    const venda = await this._model.findAll({ where: { idVenda: id }, include: [{
+      model: Cliente, as: 'cliente', attributes: { excludes: ['idCliente'] },
+    },
+    {
+      model: Produto, as: 'produto', attributes: { excludes: ['idProduto'] },
+    }] });
+
+    if (!venda) return { error: 'error' };
+
+    return venda;
+  }
 }
 
 export default VendaService;
