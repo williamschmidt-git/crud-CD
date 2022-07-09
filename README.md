@@ -1,17 +1,20 @@
 #
 CrudCD
+-------------------------------
 
 ##
 Este projeto é um Crud de Clientes, Produtos e Vendas.
 
 ###
 Dependências:
+-------------------------------
    - NodeJs v16
    - Docker v20
    - Docker-compose v1.29
 
 ###
 Tecnologias:
+-------------------------------
   - backend:
     - Typescript
     - SequelizeORM
@@ -26,6 +29,7 @@ Tecnologias:
 
 ####
 Execução:
+-------------------------------
   Após instalação das dependências, na pasta raiz do projeto rodar ```npm start```.
   
   Para verificar a execução do frontend: ```http://localhost:3000```.
@@ -34,6 +38,7 @@ Execução:
 
 ####
 Seeders:
+-------------------------------
   
   <img src="./imgs/Clientes.png">
   <img src="./imgs/Produtos.png">
@@ -41,5 +46,6 @@ Seeders:
 
 
 ####
-Explicação do projeto: 
+Explicação do projeto:
+-------------------------------
 WIP
