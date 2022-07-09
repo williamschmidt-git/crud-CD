@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Input from '../../components/atoms/Input';
 import Button from '../../components/atoms/Button';
 import { createCustomer } from '../../http/cliente';
+import RedirectToMainPage from '../../components/molecules/RedirectToMainPage';
 
 export default function CreateCustomerPage() {
   const [newCustomer, setNewCustomer] = useState({
@@ -51,6 +52,7 @@ export default function CreateCustomerPage() {
         </div>
         <Button type="submit" text="Send" />
       </form>
+      <RedirectToMainPage />
 
     </div>
   );

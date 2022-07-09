@@ -7,6 +7,7 @@ import ClientList from '../../components/organisms/ClientList';
 import { findByName, deleteCustomer } from '../../http/cliente';
 import ApplicationContext from '../../context/ApplicationContext';
 import DialogBox from '../../components/molecules/DialogBox/DialogBox';
+import RedirectToMainPage from '../../components/molecules/RedirectToMainPage';
 // import CentralizeTemplate from '../../templates/CentralizeTemplate';
 
 export default function CustomerPage() {
@@ -81,6 +82,7 @@ export default function CustomerPage() {
           onDialog={ confirmDelete }
           message={ dialog.message }
         />)}
+      <RedirectToMainPage />
     </div>
   );
 }

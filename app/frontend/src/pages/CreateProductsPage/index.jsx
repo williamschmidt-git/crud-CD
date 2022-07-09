@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Input from '../../components/atoms/Input';
 import Button from '../../components/atoms/Button';
 import { createProduct } from '../../http/produto';
+import RedirectToMainPage from '../../components/molecules/RedirectToMainPage';
 
 export default function CreateProductsPage() {
   const [newProduct, setNewProduct] = useState({
@@ -49,6 +50,7 @@ export default function CreateProductsPage() {
         </div>
         <Button type="submit" text="Enviar" />
       </form>
+      <RedirectToMainPage />
 
     </div>
   );

@@ -7,6 +7,7 @@ import DialogBox from '../../components/molecules/DialogBox/DialogBox';
 import ApplicationContext from '../../context/ApplicationContext';
 import ProductList from '../../components/organisms/ProductList';
 import { findByName, deleteProduct } from '../../http/produto';
+import RedirectToMainPage from '../../components/molecules/RedirectToMainPage';
 
 export default function ProductPage() {
   const navigate = useNavigate();
@@ -80,6 +81,7 @@ export default function ProductPage() {
           onDialog={ confirmDelete }
           message={ dialog.message }
         />)}
+      <RedirectToMainPage />
     </div>
   );
 }

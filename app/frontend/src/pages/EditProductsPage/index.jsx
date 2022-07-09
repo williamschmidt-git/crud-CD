@@ -4,6 +4,7 @@ import Input from '../../components/atoms/Input';
 import ApplicationContext from '../../context/ApplicationContext';
 import Button from '../../components/atoms/Button';
 import { updateProduct } from '../../http/produto';
+import RedirectToMainPage from '../../components/molecules/RedirectToMainPage';
 
 export default function EditProductsPage() {
   const { allProducts } = useContext(ApplicationContext);
@@ -55,6 +56,7 @@ export default function EditProductsPage() {
         </div>
       )}
       <Button text="Previous Page" onClick={ redirectPreviousPage } />
+      <RedirectToMainPage />
     </div>
   );
 }

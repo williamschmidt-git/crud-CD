@@ -3,6 +3,7 @@ import Input from '../../components/atoms/Input';
 import Button from '../../components/atoms/Button';
 import { findByName } from '../../http/sale';
 import SaleList from '../../components/organisms/SaleList';
+import RedirectToMainPage from '../../components/molecules/RedirectToMainPage';
 
 export default function SalesPage() {
   const [customerOrProduct, setCustomerOrProduct] = useState('Cliente');
@@ -70,6 +71,7 @@ export default function SalesPage() {
         <Button type="submit" text="Enviar" onClick={ (e) => searchByName(e) } />
       </form>
       <SaleList sales={ allSales } />
+      <RedirectToMainPage />
     </div>
   );
 }
