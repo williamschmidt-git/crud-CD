@@ -71,16 +71,18 @@ class VendaService {
     const cliente = await this.findCliente(nome);
 
     const [...foundCliente]  = cliente as Icliente[];
-    
-    const idCliente = foundCliente[0].idCliente;
 
-    if (!idCliente) return { error: '"Cliente" não encontrado' };
+    if (foundCliente.length > 1) {
+      const idCliente = foundCliente[0].idCliente;
+      const vendas = await this._model.findAll({ where: { idCliente }, include: [{
+        model: Cliente, as: 'cliente', attributes: { excludes: ['idCliente'] },
+      }] });
+  
+      return vendas;
+    } else {
+      return { error: '"Cliente" não encontrado' };
+    }
     
-    const vendas = await this._model.findAll({ where: { idCliente }, include: [{
-      model: Cliente, as: 'cliente', attributes: { excludes: ['idCliente'] },
-    }] });
-
-    return vendas;
   }
 
   public async byDesc({ desc }): Promise<Ivenda | Ierror> {
