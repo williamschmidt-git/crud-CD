@@ -72,7 +72,7 @@ class VendaService {
 
     const [...foundCliente]  = cliente as Icliente[];
 
-    if (foundCliente.length > 1) {
+    if (foundCliente.length >= 1) {
       const idCliente = foundCliente[0].idCliente;
       const vendas = await this._model.findAll({ where: { idCliente }, include: [{
         model: Cliente, as: 'cliente', attributes: { excludes: ['idCliente'] },
