@@ -19,6 +19,7 @@ class VendaController implements Icontroller {
   public findBy = async (req: Request, res: Response): Promise<Response> => {
     const query = req.query;
     const response = await this._service.findBy(query);
+    console.log(query);
 
     if (response.error) return res.status(404).json(response.error);
 

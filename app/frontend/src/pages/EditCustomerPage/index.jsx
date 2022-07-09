@@ -5,7 +5,7 @@ import ApplicationContext from '../../context/ApplicationContext';
 import Button from '../../components/atoms/Button';
 import { updateCustomer } from '../../http/cliente';
 
-export default function EditPage() {
+export default function EditCustomerPage() {
   const { allCustomers } = useContext(ApplicationContext);
   const [editedCustomer, setEditedCustomer] = useState({
     nmCliente: '',

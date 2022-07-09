@@ -3,9 +3,14 @@ import api from '../api';
 export async function findByName(name) {
   try {
     console.log(name);
-    const response = await api.get(`/cliente/list?name=${name}`);
-    console.log(response);
-    return response.data;
+    if (name.nome) {
+      const response = await api.get(`/venda/list?nome=${name.nome}`);
+      return response.data;
+    }
+    if (name.desc) {
+      const response = await api.get(`/venda/list?desc=${name.desc}`);
+      return response.data;
+    }
   } catch (e) {
     return { error: e.message };
   }

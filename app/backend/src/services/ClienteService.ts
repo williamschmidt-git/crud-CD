@@ -20,7 +20,7 @@ class ClienteService implements Service<Icliente> {
     return clientes;
   }
 
-  public async findBy(name: string): Promise<Icliente | null | Ierror> {
+  public async findBy(name: string): Promise<Icliente[] | null | Ierror> {
     const cliente = await this._model.findAll({ where: { nmCliente: {
       [Op.like]: `%${name}%`,
     } }, raw: true });

@@ -24,14 +24,19 @@ class VendaService {
   }
 
   public async findBy(query): Promise<Ivenda | Ierror> {
-    // return nome ? (this.byName(nome)) : (this.byDesc(desc));
+    console.log(query);
     const [paramKey] = Object.keys(query);
-    if (paramKey  === 'desc') return this.byDesc(query);
-    if (paramKey  === 'nome') {
-      const clientes = this.byName(query);
+    if (paramKey  === 'desc') {
+      const produtos = this.byDesc(query);
+      if (!produtos) return { error: '"Produto" não encontrado' };
+      return produtos;
+    }
+    if (paramKey === 'nome') {
+      const clientes = await this.byName(query);
       if (!clientes) return { error: '"Cliente" não encontrado' };
       return clientes;
     }
+    
   }
 
   public async update(id: string, obj: Ivenda): Promise<Ivenda | Ierror | null> {
@@ -66,7 +71,9 @@ class VendaService {
   private async byName({ nome }): Promise<Ivenda | Ierror> {
     const cliente = await this.findCliente(nome);
 
-    const { idCliente }  = cliente as Icliente;
+    const [...foundCliente]  = cliente as Icliente[];
+    
+    const idCliente = foundCliente[0].idCliente;
 
     if (!idCliente) return { error: '"Cliente" não encontrado' };
     
@@ -80,9 +87,11 @@ class VendaService {
   private async byDesc({ desc }): Promise<Ivenda | Ierror> {
     const produto = await this.findProduto(desc);
 
-    if (!produto) return { error: '"Produto" não encontrado' };
+    const [...foundProduto] = produto as Iproduto[];
 
-    const { idProduto } = produto as Iproduto;
+    const idProduto = foundProduto[0].idProduto;
+
+    if (!idProduto) return { error: '"Produto" não encontrado' };
 
     const vendas = await this._model.findAll({ where: { idProduto }, include: [{
       model: Produto, as: 'produto', attributes: { excludes: ['idProduto'] },
@@ -91,14 +100,14 @@ class VendaService {
     return vendas;
   }
 
-  private async findCliente(name: string): Promise<Icliente | Ierror> {
+  private async findCliente(name: string): Promise<Icliente[] | Ierror> {
     const instanciaCliente = new ClienteService(Cliente);
     const cliente  = await instanciaCliente.findBy(name);
 
     return cliente;
   }
 
-  private async findProduto(desc: string): Promise<Iproduto | Ierror> {
+  private async findProduto(desc: string): Promise<Iproduto[] | Ierror> {
     const instanciaProduto = new ProdutoService(Produto);
     const produto = await instanciaProduto.findBy(desc);
 
