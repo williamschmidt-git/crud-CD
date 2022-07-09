@@ -5,18 +5,9 @@ import Button from '../../atoms/Button';
 import TextTitle from '../../atoms/TextTitle';
 import { findAllSales } from '../../../http/sale';
 import ApplicationContext from '../../../context/ApplicationContext';
-// import { findById } from '../../../http/produto';
-// import { findById } from '../../../http/produto';
 
 export default function SaleList({ sales, handleDelete }) {
-  // const [allSales, setAllSales] = useState();
   const { allSales, setAllSales } = useContext(ApplicationContext);
-
-  // const newSales = async () => {
-  //   sales.map(async (e) => {
-  //     setAllSales(await findAllSales(e.idCliente));
-  //   });
-  // };
 
   const newSales = useCallback(async () => {
     sales.map(async (e) => {
@@ -31,7 +22,6 @@ export default function SaleList({ sales, handleDelete }) {
 
   function manipulateDateString(string) {
     const newString = string.split('T');
-    console.log(newString);
     return newString[0];
   }
 
@@ -59,7 +49,7 @@ export default function SaleList({ sales, handleDelete }) {
                 </td>
                 <td>
                   <TextTitle>
-                    { sale.produto.dscProdut }
+                    { sale.produto.dscProduto }
                   </TextTitle>
                 </td>
                 <td>
