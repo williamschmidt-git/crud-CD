@@ -29,6 +29,10 @@ Execução:
   Após instalação das dependências, na pasta raiz do projeto rodar ```npm start```
   Para verificar a execução do frontend: ```http://localhost:3000```
 
+####
+Seeders:
+  <img src="./imgs/Clientes.png">
+
 
 ####
 Explicação do projeto: 
