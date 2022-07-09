@@ -1,6 +1,9 @@
 import { Service } from './interfaces/Service';
 import { Icliente } from './interfaces/Cliente';
 import { Ierror } from './interfaces/Error';
+import Sequelize from 'sequelize';
+
+const Op = Sequelize.Op;
 
 class ClienteService implements Service<Icliente> {
   private _model;
@@ -18,7 +21,9 @@ class ClienteService implements Service<Icliente> {
   }
 
   public async findBy(name: string): Promise<Icliente | null | Ierror> {
-    const cliente = await this._model.findAll({ where: { nmCliente: name }, raw: true });
+    const cliente = await this._model.findAll({ where: { nmCliente: {
+      [Op.like]: `%${name}%`,
+    } }, raw: true });
 
     if (!cliente) return { error: 'Não encontrado ' };
 
