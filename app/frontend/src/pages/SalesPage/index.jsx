@@ -99,7 +99,11 @@ export default function SalesPage() {
         {customerOrProduct && (listenerCustomerOrProduct())}
         <Button type="submit" text="Enviar" onClick={ (e) => searchByName(e) } />
       </form>
-      <SaleList sales={ allSales } handleDelete={ handleDelete } />
+      <SaleList
+        sales={ allSales }
+        handleDelete={ handleDelete }
+        productOrCustomer={ customerOrProduct }
+      />
       {dialog.isLoading && (
         <DialogBox
           onDialog={ confirmDelete }

@@ -18,7 +18,7 @@ class VendaService {
   public async findAll(): Promise<Ivenda[] | Ierror> {
     const vendas = await this._model.findAll();
 
-    if (!vendas) return { error: 'Não encontrado' };
+    if (!vendas) return { error: 'error' };
 
     return vendas;
   }
@@ -28,6 +28,19 @@ class VendaService {
       include: [
         { model: Cliente, as: 'cliente' },
         { model: Produto, as: 'produto' },
+      ],
+    });
+
+    if (!vendas) return { error: 'Não encontrado' };
+
+    return vendas;
+  }
+
+  public async findByProduct(id: string): Promise<Ivenda[] | Ierror> {
+    const vendas = await this._model.findAll({ where: { idProduto: id }, 
+      include: [
+        { model: Produto, as: 'produto' },
+        { model: Cliente, as: 'cliente' },
       ],
     });
 

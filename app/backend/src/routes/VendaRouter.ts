@@ -16,6 +16,7 @@ class VendaRouter {
     this._route.get('/list?', this._controller.findBy);
     this._route.get('/:id', this._controller.findSale);
     this._route.get('/cliente/:id', this._controller.findByCustomer);
+    this._route.get('/produto/:id', this._controller.findByProduct);
     this._route.patch('/:id', this._controller.update);
     this._route.delete('/:id', this._controller.delete);
     this._route.post('/', this._controller.create);
