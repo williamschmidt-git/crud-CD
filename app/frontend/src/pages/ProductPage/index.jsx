@@ -1,25 +1,24 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
-import Input from '../../components/atoms/Input';
 import Label from '../../components/atoms/Label';
+import Input from '../../components/atoms/Input';
 import Button from '../../components/atoms/Button';
-import ClientList from '../../components/organisms/ClientList';
-import { findByName, deleteCustomer } from '../../http/cliente';
-import ApplicationContext from '../../context/ApplicationContext';
 import DialogBox from '../../components/molecules/DialogBox/DialogBox';
+import ApplicationContext from '../../context/ApplicationContext';
+import ProductList from '../../components/organisms/ProductList';
+import { findByName, deleteProduct } from '../../http/produto';
 import RedirectToMainPage from '../../components/molecules/RedirectToMainPage';
-// import CentralizeTemplate from '../../templates/CentralizeTemplate';
 
-export default function CustomerPage() {
+export default function ProductPage() {
   const navigate = useNavigate();
-  const [inputName, setName] = useState('');
+  const [inputProduct, setName] = useState('');
   const [dialog, setDialog] = useState({
     message: '',
     isLoading: false,
   });
-  const { allCustomers, setAllCustomers } = useContext(ApplicationContext);
+  const { allProducts, setAllProducts } = useContext(ApplicationContext);
 
-  const idProductRef = useRef();
+  const idClienteRef = useRef();
 
   function handleInput(e) {
     const { value, name } = e.target;
@@ -37,46 +36,46 @@ export default function CustomerPage() {
 
   const handleDelete = (id) => {
     handleDialog('Você tem certeza que quer deletar este registro?', true);
-    idProductRef.current = id;
+    idClienteRef.current = id;
   };
+
+  function redirectToForm() {
+    navigate('/products/create');
+  }
 
   const confirmDelete = (choose) => {
     if (choose) {
-      setAllCustomers(allCustomers.filter((p) => p.idCliente !== idProductRef.current));
+      setAllProducts(allProducts.filter((p) => p.idProduto !== idClienteRef.current));
       handleDialog('', false);
-      deleteCustomer(idProductRef.current);
+      deleteProduct(idClienteRef.current);
     } else {
       handleDialog('', false);
     }
   };
 
-  function redirectToForm() {
-    navigate('/customers/create');
-  }
-
   function searchByName() {
-    findByName(inputName.inputName).then((data) => setAllCustomers(data));
+    findByName(inputProduct.productName).then((data) => setAllProducts(data));
   }
 
   return (
     <div>
-      <Label htmlFor="inputName">
+      <Label htmlFor="productName">
         Insira o nome
         <Input
-          id="inputName"
+          id="productName"
           type="text"
-          name="inputName"
+          name="productName"
           onChange={ (e) => handleInput(e) }
-          placeholder="Fulana da Silva"
+          placeholder="Produto"
         />
         <Button text="Enviar" onClick={ () => searchByName() } />
       </Label>
 
       <div>
-        <Button text="Criar novo usuário" onClick={ () => redirectToForm() } />
+        <Button text="Criar novo Produto" onClick={ () => redirectToForm() } />
       </div>
 
-      <ClientList customers={ allCustomers } handleDelete={ handleDelete } />
+      <ProductList products={ allProducts } handleDelete={ handleDelete } />
       {dialog.isLoading && (
         <DialogBox
           onDialog={ confirmDelete }

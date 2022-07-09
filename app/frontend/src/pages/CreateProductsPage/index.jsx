@@ -1,51 +1,49 @@
 import React, { useState } from 'react';
 import Input from '../../components/atoms/Input';
 import Button from '../../components/atoms/Button';
-import { createCustomer } from '../../http/cliente';
+import { createProduct } from '../../http/produto';
 import RedirectToMainPage from '../../components/molecules/RedirectToMainPage';
 
-export default function CreateCustomerPage() {
-  const [newCustomer, setNewCustomer] = useState({
-    nmCliente: '',
-    cidade: '',
+export default function CreateProductsPage() {
+  const [newProduct, setNewProduct] = useState({
+    dscProduto: '',
+    vlrUnitario: 0,
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createCustomer(newCustomer);
+    createProduct(newProduct);
   };
 
   const handleChange = (e) => {
     const { value, name } = e.target;
-    setNewCustomer({
-      ...newCustomer,
+    setNewProduct({
+      ...newProduct,
       [name]: value,
     });
   };
-
-  console.log(newCustomer);
 
   return (
     <div>
       <form onSubmit={ handleSubmit }>
         <div>
           <label htmlFor="input-name">
-            Insira o nome:
+            Insira a descrição do Produto:
             <Input
               type="text"
-              name="nmCliente"
-              id="input-name"
+              name="dscProduto"
+              id="input-desc"
               onChange={ (e) => handleChange(e) }
             />
           </label>
         </div>
         <div>
-          <label htmlFor="input-city">
-            Insira a cidade:
+          <label htmlFor="input-vlr">
+            Insira o valor:
             <Input
               type="text"
-              name="cidade"
-              id="input-city"
+              name="vlrUnitario"
+              id="input-vlr"
               onChange={ (e) => handleChange(e) }
             />
           </label>

@@ -14,6 +14,7 @@ class ProdutoRouter {
   public getRoutes() {
     this._route.get('/', this._controller.findAll);
     this._route.get('/list?', this._controller.findBy);
+    this._route.get('/:id', this._controller.findById);
     this._route.patch('/:id', this._controller.update);
     this._route.delete('/:id', this._controller.delete);
     this._route.post('/', this._controller.create);

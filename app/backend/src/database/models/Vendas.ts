@@ -49,6 +49,10 @@ Venda.init({
     type: FLOAT,
     allowNull: false,
   },
+  vlrTotalVenda: {
+    type: FLOAT,
+    allowNull: false,
+  }
 }, {
   underscored: false,
   sequelize: db,

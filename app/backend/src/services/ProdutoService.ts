@@ -20,8 +20,16 @@ class ProdutoService implements Service<Iproduto> {
     return produtos;
   }
 
-  public async findBy(name: string): Promise<Iproduto | null | Ierror> {
-    const produto = await this._model.findOne({ where: {
+  public async findById(id: string): Promise<Iproduto[] | Ierror> {
+    const produto = await this._model.findAll({ where: { idProduto: id } });
+    
+    if (!produto) return { error: '"Produto" Não encontrado' };
+
+    return produto;
+  }
+
+  public async findBy(name: string): Promise<Iproduto[] | null | Ierror> {
+    const produto = await this._model.findAll({ where: {
       dscProduto: {
         [Op.like]:  `%${name}%`,
       },
