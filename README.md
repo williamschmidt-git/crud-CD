@@ -49,3 +49,5 @@ Seeders:
 Explicação do projeto:
 -------------------------------
 Este projeto é um CRUD de Clientes, Produtos e Vendas. Ele possui 3 imagens Docker, uma para o database, uma para o frontend e a outra para o backend. Algumas melhorias ainda podem ser feitas, mas em respeito à data de entrega do projeto, irei deixar as atualizações em uma PR, caso tenham interesse. Abaixo segue um link do Loom, com uma breve demonstração da aplicação.
+
+Link com vídeo explicativo no Loom: [LINK](https://www.loom.com/share/682de426160046c585cd0031c35d5f6a)
